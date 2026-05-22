@@ -1,0 +1,27 @@
+{
+  "name": "cortex-automate-test",
+  "version": "1.0.0",
+  "description": "Automated tests for Cortex Cloud",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:site": "node run.js",
+    "site:module": "node run.js site:module",
+    "site:testcase": "node run.js site:testcase",
+    "test:new-cortex:login": "node run.js new-cortex login",
+    "test:new-cortex:medical-record": "node run.js new-cortex medical-record",
+    "test:new-cortex:medical-record-search": "node run.js new-cortex medical-record-search",
+    "test:new-cortex:advance-visits": "node run.js new-cortex advance-visits",
+    "test:tmh:login": "node run.js tmh login",
+    "test:sbh:login": "node run.js sbh login",
+    "test:nuh:login": "node run.js nuh login"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}

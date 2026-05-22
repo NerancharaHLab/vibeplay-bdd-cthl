@@ -1,0 +1,22 @@
+﻿No,Module Name,Function / Sub-module,Description,Status
+1,เวชระเบียน (Medical Records),สร้างประวัติใหม่ (Create New Patient),"บันทึกข้อมูลพื้นฐาน, เลขบัตรประชาชน/Passport, ที่อยู่, ผู้ติดต่อฉุกเฉิน",ปกติ
+1,เวชระเบียน (Medical Records),ค้นหาผู้ป่วย (Patient Search),ค้นหาด้วยชื่อ หรือ เลข HN,ปกติ
+1,เวชระเบียน (Medical Records),แก้ไขข้อมูล (Edit Profile),ปรับปรุงข้อมูลส่วนตัวผู้ป่วย,ปกติ
+2,งานผู้ป่วยนอก (Outpatient - OPD),รายการผู้ป่วย (Patient List),"แยกตามสถานะ (รอตรวจ, กำลังตรวจ, ตรวจเสร็จ, ยกเลิก)",ปกติ
+2,งานผู้ป่วยนอก (Outpatient - OPD),ตัวกรอง (Filters),"กรองตามคลินิก, ชื่อแพทย์, หรือวันที่",ปกติ
+2,งานผู้ป่วยนอก (Outpatient - OPD),บันทึกการตรวจ (OPD Note),"บันทึกอาการ (Chief Complaint), การวินิจฉัย (Diagnosis)",ปกติ
+2,งานผู้ป่วยนอก (Outpatient - OPD),การสั่งการ (Order Entry),"สั่งยา (Medication), ส่ง Lab, ส่ง X-Ray (Imaging)",ปกติ
+2,งานผู้ป่วยนอก (Outpatient - OPD),ประวัติย้อนหลัง (Patient History),"ดู Timeline, ประวัติการแพ้ยา, โรคประจำตัว",ปกติ
+3,งานผู้ป่วยใน (Inpatient - IPD),จัดการหอผู้ป่วย (Ward Management),ดูรายการผู้ป่วยตามตึกหรือหอผู้ป่วย,ปกติ
+3,งานผู้ป่วยใน (Inpatient - IPD),แผนผังเตียง (Bed Management),ดูสถานะเตียงว่าง/ไม่ว่าง,ปกติ
+3,งานผู้ป่วยใน (Inpatient - IPD),บันทึกอาการ (Clinical Note),บันทึกความก้าวหน้าอาการผู้ป่วยใน,ปกติ
+4,ห้องยา (Pharmacy),จ่ายยา (Dispensing),ตรวจสอบและจ่ายยาตามคำสั่งแพทย์,ปกติ
+4,ห้องยา (Pharmacy),ประวัติการใช้ยา (Medication History),ดูรายการยาที่เคยได้รับ,ปกติ
+5,ห้องปฏิบัติการ (Laboratory),-,Error 404,พบปัญหา
+6,ห้องรังสี (Radiology),-,Error 404,พบปัญหา
+7,โภชนาการ (Nutrition),-,No routes matched location,พบปัญหา
+8,งานการเงินและสิทธิประโยชน์ (Finance & Disbursement),การเงิน (Finance),ตรวจสอบค่าใช้จ่าย (จำกัดสิทธิ์การเข้าถึง),ปกติ
+8,งานการเงินและสิทธิประโยชน์ (Finance & Disbursement),การสรุปสิทธิ (OPD Coding),บันทึกรหัสโรคและหัตถการเพื่อเบิกจ่าย,ปกติ
+9,ระบบจัดการเอกสาร (Document Management),สแกนเอกสาร (Document Scanning),"สแกนใบรับรองแพทย์, ผล EKG, หรือเอกสารสิทธิต่างๆ เข้าระบบ",ปกติ
+10,รายงานและตั้งค่า (Reports & Settings),รายงาน (Reports),รายงานสถิติผู้ป่วยและข้อมูลบริหารจัดการ,ปกติ
+10,รายงานและตั้งค่า (Reports & Settings),ตั้งค่า (Settings),"ตั้งค่า Template บันทึกทางการแพทย์, ตั้งค่าสิทธิ์ผู้ใช้งาน",ปกติ

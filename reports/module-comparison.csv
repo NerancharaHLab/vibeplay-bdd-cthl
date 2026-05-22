@@ -1,0 +1,14 @@
+Module Name,DEV URL,DEV Status,DEV Tabs/Menu,NUH URL,NUH Status,NUH Tabs/Menu,Remarks
+เวชระเบียน,/cortex/reception/search-patient,✅ Available,-,/cortex/reception/search-patient,✅ Available,-,ทั้ง 2 site เหมือนกัน
+ศูนย์จัดการเตียง,/cortex/admission-center?tab=admit-request-list,✅ Available,"Admission Management, Create AN, คำขอ Admit, AN, จำหน่าย, ปฏิเสธ",/cortex/admission-center?tab=admit-request-list,✅ Available,"Admission Management, Create AN, คำขอ Admit, AN, จำหน่าย, ปฏิเสธ",ทั้ง 2 site เหมือนกัน
+ผู้ป่วยนอก,/cortex/opd/patient-list?tab=ready-or-hold&from=2026-05-06&to=2026-05-06,✅ Available,"นัดหมาย/ลงทะเบียน, ทั้งหมด, เช็คอิน, พร้อมตรวจ, ตรวจเสร็จ, จำหน่าย, เสร็จสิ้น, ยกเลิก",/cortex/opd/patient-list?tab=ready,✅ Available,"นัดหมาย/ลงทะเบียน, ทั้งหมด, เช็คอิน, พร้อมตรวจ, Observe, ตรวจเสร็จ, จำหน่าย, เสร็จสิ้น, ยกเลิก",NUH มี tab Observe เพิ่มเติม
+ผู้ป่วยใน,/cortex/ipd/select-ward,✅ Available,ส่ง,/cortex/ipd/select-ward,✅ Available,ส่ง,ทั้ง 2 site เหมือนกัน
+ห้องยา,/cortex/pharmacy/select-location,✅ Available,"เลือกห้องยา, ส่ง",/cortex/pharmacy/select-location,✅ Available,ส่ง,ทั้ง 2 site เหมือนกัน
+ห้องปฏิบัติการ,/cortex/apps,❌ Not Accessible,-,/cortex/apps,❌ Not Accessible,-,ทั้ง 2 site ไม่เปิดได้
+ห้องรังสี,/cortex/apps,❌ Not Accessible,-,/cortex/apps,❌ Not Accessible,-,ทั้ง 2 site ไม่เปิดได้
+การเงิน,/cortex/apps,❌ Not Accessible,-,/cortex/apps,❌ Not Accessible,-,ทั้ง 2 site ไม่เปิดได้
+เบิกจ่าย,/cortex/claim/opd-coding-list,✅ Available,"OPD Coding, VN, รอลงรหัส",/cortex/claim/opd-coding-list,✅ Available,"OPD Coding, VN, รอลงรหัส",ทั้ง 2 site เหมือนกัน
+โภชนาการ,/cortex/apps,❌ Not Accessible,-,/cortex/apps,❌ Not Accessible,-,ทั้ง 2 site ไม่เปิดได้
+รายงาน,/cortex/reports,✅ Available,ออกรายงาน,/cortex/reports,✅ Available,ออกรายงาน,ทั้ง 2 site เหมือนกัน
+ตั้งค่า,/cortex/setting/note-template,✅ Available,"Note Template, เพิ่ม Note Template",N/A,❌ Not Available,N/A,มี ใน DEV เท่านั้น
+การจัดการเอกสาร,/cortex/document-management/upload,✅ Available,"สแกนเอกสาร, แบบระบุ HN, แบบอัตโนมัติ",N/A,❌ Not Available,N/A,มี ใน DEV เท่านั้น

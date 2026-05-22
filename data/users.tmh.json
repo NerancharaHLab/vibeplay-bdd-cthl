@@ -1,0 +1,11 @@
+[
+  { "username": "hlab-1", "password": "123456", "permission": "HLAB", "role": "hlab" },
+  { "username": "nurse-1", "password": "123456", "permission": "Nurse", "role": "nurse" },
+  { "username": "phy-1", "password": "123456", "permission": "Physician", "role": "physician" },
+  { "username": "reception-1", "password": "123456", "permission": "Reception", "role": "reception" },
+  { "username": "phar-1", "password": "123456", "permission": "Pharmacy", "role": "pharmacy" },
+  { "username": "cashier-1", "password": "123456", "permission": "Cashier", "role": "cashier" },
+  { "username": "coder-1", "password": "123456", "permission": "Coder", "role": "coding" },
+  { "username": "it-1", "password": "123456", "permission": "IT", "role": "it" },
+  { "username": "user1", "password": "MyPassw0rd", "permission": "Super User", "role": "super" }
+]

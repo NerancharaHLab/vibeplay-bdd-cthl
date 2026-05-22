@@ -1,0 +1,14 @@
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/.local-browsers/
+.env
+
+# Ignore locally generated test-run screenshots
+internal_nutrition.png
+internal_bed.png
+internal_disbursement.png
+*.webm
+*.png
+!apps_detailed.png
