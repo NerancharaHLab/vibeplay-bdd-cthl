@@ -1,22 +1,40 @@
-# BDD Scenarios: Check Apps - Nutrition (New Cortex)
+# BDD Scenarios: Check Apps - Nutrition / ระบบตรวจสอบโมดูลโภชนาการ (New Cortex)
 
-พื้นที่สำหรับทีม QA ในการเขียน ออกแบบ และบันทึกเคสทดสอบรูปแบบ Given-When-Then ของโมดูลโภชนาการ (Nutrition Module)
+พื้นที่สำหรับทีม QA ในการดูตัวอย่าง ออกแบบ และดำเนินการเคสทดสอบการนำทางเพื่อตรวจสอบโมดูลโภชนาการ (Nutrition Module) และตรวจสอบสถานะระบบเบื้องต้น พร้อมตารางตรวจสอบพารามิเตอร์ของข้อมูลทดสอบ (Parameters & Data Mapping)
 
 ---
 
 ## 1. เคสทดสอบที่ผ่านการเขียนสคริปต์อัตโนมัติแล้ว (Automated Scenarios)
 
-### Scenario: Check Nutrition module
-* **Given** Given the user is logged in as a super user
-* **When** When the user navigates to the apps page
-* **And** And opens the Nutrition (โภชนาการ) module
-* **Then** Then they should take a full page screenshot for validation
+### 🚩 Scenario Outline: การเข้าตรวจสอบโมดูลโภชนาการของไซต์ (Check App Accessibility)
+*คำอธิบาย:* ตรวจสอบความถูกต้องของการนำทางเพื่อเข้าสู่ระบบงานโภชนาการ โดยใช้สิทธิ์ผู้ใช้งานระดับสูงและบันทึกภาพถ่ายหน้าจอ
+
+* **Given** ทีมงานล็อกอินเข้าสู่ระบบ Cortex Cloud ด้วยสิทธิ์การใช้งานระดับ **"<role>"** (`Given the user is logged in as a super user`)
+* **When** ผู้ใช้นำทางเข้ามายังหน้ารวมแอปพลิเคชันหลัก (`When the user navigates to the apps page`)
+* **And** กดเปิดเพื่อเข้าสู่ระบบงานย่อย **"<module_name>"** (`And opens the Nutrition (โภชนาการ) module`)
+* **Then** ระบบงานย่อยจะต้องโหลดหน้าสำเร็จ และทำการบันทึกรูปหน้าจอเต็มหน้าเป็นพยานหลักฐานเพื่อตรวจสอบความถูกต้องของอินเทอร์เฟซ (`Then they should take a full page screenshot for validation`)
+
+---
+
+## 📊 ตารางตรวจสอบพารามิเตอร์สำหรับเคสอัตโนมัติ (Automated Parameters Reference)
+
+| ตัวแปรพารามิเตอร์ | ประเภทข้อมูล | แหล่งที่มาของข้อมูล | ค่าที่ใช้ในการทดสอบ | คำอธิบายและฟังก์ชันการใช้งานในโค้ด |
+| :--- | :--- | :--- | :--- | :--- |
+| **`<role>`** | String (สิทธิ์เข้าใช้งาน) | ระบบจัดสิทธิ์อัตโนมัติ | `super` | ดึงข้อมูลบัญชีผ่านระบบ `getUserByRole(undefined, 'super')` |
+| **`<module_name>`** | String (ชื่อโมดูลเป้าหมาย) | Hardcoded ใน Step | `Nutrition (โภชนาการ)` | ถูกส่งเปิดหน้าโมดูลผ่านคลาส `AppsPage.openNutrition()` |
+| **`<screenshot_name>`** | String (ชื่อไฟล์ภาพถ่าย) | โค้ดทดสอบอัตโนมัติ | `reports/screenshots/new-cortex/nutrition.png` | บันทึกรูปภาพแบบ Full page เพื่อใช้ตรวจทานหน้า UI โดย QA |
 
 ---
 
 ## 2. พื้นที่สำหรับ QA ออกแบบเคสทดสอบใหม่ (QA Backlog / Draft Scenarios)
 
-### Scenario: [ระบุชื่อเคสทดสอบใหม่ที่นี่]
-* **Given** ...
-* **When** ...
-* **Then** ...
+> [!TIP]
+> ทีม QA สามารถเปลี่ยนค่าพารามิเตอร์ของโมดูลย่อยและสิทธิ์อื่นๆ เพื่อสร้างเคสทดสอบ Accessibility สำหรับแอปย่อยอื่นในระบบ Cortex Cloud (เช่น ระบบงานสิ่งส่งตรวจ, จ่ายยา, โภชนาการบำบัด)
+
+### Scenario: [ระบุรหัสเคส - เช่น APP-002] [ระบุชื่อเคสทดสอบ เช่น การเข้าถึงโมดูลจ่ายยาด้วยสิทธิ์พยาบาล]
+* **Given** ทีมงานล็อกอินเข้าสู่ระบบ Cortex Cloud ด้วยสิทธิ์การใช้งานระดับ **"<role_nurse>"**
+* **When** ผู้ใช้นำทางเข้ามายังหน้ารวมแอปพลิเคชันหลัก
+* **And** กดเปิดเพื่อเข้าสู่ระบบงานย่อย **"<target_module>"**
+* **Then** หน้าจอระบบงานย่อยจะต้องไม่แสดงสัญลักษณ์แจ้งข้อผิดพลาดสิทธิ์เข้าไม่ถึง (Permission Denied)
+* **And** ระบบจะต้องแสดงเมนูการใช้งานสำหรับพยาบาลอย่างถูกต้อง
+
