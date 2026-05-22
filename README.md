@@ -104,3 +104,13 @@ npx playwright show-report
 - `data/users.tmh.json`
 - `data/users.sbh.json`
 - `data/users.nuh.json`
+
+## พื้นที่สำหรับทีม QA ในการออกแบบเคสทดสอบ (QA BDD Scenarios Space)
+เราได้จัดทำพื้นที่สำหรับทีม QA ในการเขียน ออกแบบ และวางแผนเคสทดสอบล่วงหน้า โดยแยกหมวดหมู่ตามรายไซต์และโมดูลอย่างชัดเจนในรูปแบบ **Markdown (.md)** ภายใต้โฟลเดอร์หลัก:
+- `bdd-scenarios/`
+  - `new-cortex/` (`login.md`, `medical-record.md`, `medical-record-search.md`, `advance-visits.md`, `check_apps.md`)
+  - `tmh/` (`login.md`)
+  - `sbh/` (`login.md`)
+  - `nuh/` (`login.md`)
+
+ทีม QA สามารถเปิดไฟล์เหล่านี้และเพิ่มรายละเอียด Scenario (Given / When / Then) ใหม่ๆ ได้ทันที เมื่อผ่านการอนุมัติ ทีมพัฒนาระบบอัตโนมัติจะสามารถนำสเต็ปภาษาธรรมชาติเหล่านั้นไปแมปลงในสคริปต์ Playwright ได้อย่างรวดเร็วและเป็นระบบ
