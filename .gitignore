@@ -5,10 +5,30 @@ blob-report/
 playwright/.local-browsers/
 .env
 
-# Ignore locally generated test-run screenshots
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Ignore locally generated test-run screenshots/videos
 internal_nutrition.png
 internal_bed.png
 internal_disbursement.png
 *.webm
 *.png
 !apps_detailed.png
+
+# Allow Knowledge Management, Agent Skills, and documentation to be pushed
+!**/km/**
+!**/skills/**
+!**/knowledge/**
+!**/*.md
+
