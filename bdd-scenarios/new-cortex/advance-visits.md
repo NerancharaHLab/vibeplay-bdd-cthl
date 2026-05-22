@@ -1,26 +1,36 @@
-# BDD Scenarios: Advance Visits (New Cortex)
+# BDD Scenarios: Advance Visits / การเปิด Visit ผู้ป่วยนัด (New Cortex)
 
-พื้นที่สำหรับทีม QA ในการเขียน ออกแบบ และบันทึกเคสทดสอบรูปแบบ Given-When-Then ของระบบการเปิด Visit ผู้ป่วยนัดล่วงหน้า (Advance Visits)
+พื้นที่สำหรับทีม QA ในการดูตัวอย่างเคสทดสอบการจัดการคิวผู้ป่วยนัดล่วงหน้าที่แมปตามไฟล์ `TEST_CASES_MEDICAL_RECORD.md` อย่างเป็นระบบ
 
 ---
 
 ## 1. เคสทดสอบที่ผ่านการเขียนสคริปต์อัตโนมัติแล้ว (Automated Scenarios)
 
-### Scenario: Verify UI elements on Advance Visits page
-* **Given** Given the user is logged in to Cortex Cloud
-* **When** When they navigate to the Advance Visits page
-* **Then** Then they should see the active URL and the action buttons (Add, Search)
+### 🚩 AV-001 (UI): ตรวจสอบองค์ประกอบหน้าจอ "เปิด Visit ผู้ป่วยนัด"
+*คำอธิบาย:* ตรวจสอบการโหลดหน้าจอระบบนัดหมายว่าปุ่มหลักแสดงขึ้นมาครบถ้วนเพื่อพร้อมให้บริการผู้ป่วย
 
-### Scenario: Check Filter inputs visibility
-* **Given** Given the user is logged in to Cortex Cloud
-* **When** When they navigate to the Advance Visits page
-* **Then** Then they should see filter options for Date, Clinic, and Doctor
+* **Given** ผู้ใช้ล็อกอินเข้าสู่ระบบ Cortex Cloud ด้วยสิทธิ์การใช้งานของทีมเรียบร้อยแล้ว
+* **When** ผู้ใช้นำทางเข้ามาที่หน้าจอโปรแกรมเปิดนัดหมายล่วงหน้า (Advance Visits Page)
+* **Then** ที่อยู่ URL ของเว็บจะต้องแสดงชื่อพาร์ท `/advance-visits` อย่างถูกต้อง
+* **And** ปุ่มสำหรับคำสั่ง "เพิ่มรายการนัด" (Add Button) และปุ่ม "ค้นหาข้อมูลนัดหมาย" (Search Button) จะต้องแสดงผลขึ้นมาเด่นชัดและใช้งานได้จริง
+
+### 🚩 AV-002 (UI): ตรวจสอบฟิลด์ตัวกรองที่จำเป็น
+*คำอธิบาย:* ตรวจสอบว่ามีช่องกรองขอบเขตการดูข้อมูลนัดหมาย (Filters) แสดงขึ้นมาครบถ้วนสำหรับการดำเนินงานของแผนก
+
+* **Given** ผู้ใช้นำทางเข้ามาที่หน้าจอโปรแกรมเปิดนัดหมายล่วงหน้าเรียบร้อยแล้ว
+* **Then** ช่องสำหรับระบุตัวเลือกค้นหาตัวกรองต่อไปนี้จะต้องปรากฏขึ้นมาบนหน้าจอ:
+  * ช่องระบุ วันที่นัดหมาย (Date Input Picker)
+  * ตัวเลือกระบุ คลินิกหรือหน่วยบริการ (Clinic Selection Dropdown)
+  * ตัวเลือกระบุ แพทย์ผู้นัดตรวจ (Doctor Selection Dropdown)
 
 ---
 
-## 2. พื้นที่สำหรับ QA ออกแบบเคสทดสอบใหม่ (QA Backlog / Draft Scenarios)
+## 2. ตัวอย่าง BDD สำหรับเคสทดสอบอื่นในแผนงาน (QA Backlog & Manual Scenarios)
 
-### Scenario: [ระบุชื่อเคสทดสอบใหม่ที่นี่]
-* **Given** ...
-* **When** ...
-* **Then** ...
+### 🚩 AV-003 (Functional): ทดสอบการกรองข้อมูลนัดหมายตามวันที่
+*คำอธิบาย:* ตรวจสอบฟังก์ชันของระบบกรองข้อมูลปฏิทินนัดหมาย ว่าเมื่อระบุวันที่ต้องการแล้วระบบดึงรายชื่อผู้ป่วยนัดเฉพาะวันที่นั้นขึ้นมาได้จริง
+
+* **Given** ผู้ใช้นำทางเข้ามาที่หน้าจอโปรแกรมเปิดนัดหมายล่วงหน้าเรียบร้อยแล้ว
+* **When** ทำการเลือกวันที่ในช่องตัวกรอง "วันที่นัดหมาย" เป็น "25/05/2026" (หรือวันที่ต้องการทดสอบ)
+* **And** คลิกที่ปุ่ม "ค้นหาข้อมูลนัดหมาย" (Search Button)
+* **Then** รายชื่อผู้ป่วยนัดที่แสดงผลในตารางด้านล่างทั้งหมด จะต้องเป็นรายการผู้ป่วยที่มีกำหนดนัดหมายตรวจตรงกับวันที่ "25/05/2026" เท่านั้น
