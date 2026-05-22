@@ -219,7 +219,7 @@ logInfo(`Running command: SITE=${site}${userRole ? ` USER_ROLE=${userRole}` : ''
 console.log('------------------------------------------------------------\n');
 
 const child = spawn('npx', playwrightArgs, {
-  cwd: __dirname,
+  cwd: path.join(__dirname, '..'),
   env,
   stdio: 'inherit',
   shell: true,

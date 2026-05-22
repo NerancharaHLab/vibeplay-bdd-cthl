@@ -5,16 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-    "test:site": "node run.js",
-    "site:module": "node run.js site:module",
-    "site:testcase": "node run.js site:testcase",
-    "test:new-cortex:login": "node run.js new-cortex login",
-    "test:new-cortex:medical-record": "node run.js new-cortex medical-record",
-    "test:new-cortex:medical-record-search": "node run.js new-cortex medical-record-search",
-    "test:new-cortex:advance-visits": "node run.js new-cortex advance-visits",
-    "test:tmh:login": "node run.js tmh login",
-    "test:sbh:login": "node run.js sbh login",
-    "test:nuh:login": "node run.js nuh login"
+    "test:site": "node skills/run.js",
+    "site:module": "node skills/run.js site:module",
+    "site:testcase": "node skills/run.js site:testcase",
+    "test:new-cortex:login": "node skills/run.js new-cortex login",
+    "test:new-cortex:medical-record": "node skills/run.js new-cortex medical-record",
+    "test:new-cortex:medical-record-search": "node skills/run.js new-cortex medical-record-search",
+    "test:new-cortex:advance-visits": "node skills/run.js new-cortex advance-visits",
+    "test:tmh:login": "node skills/run.js tmh login",
+    "test:sbh:login": "node skills/run.js sbh login",
+    "test:nuh:login": "node skills/run.js nuh login"
   },
   "devDependencies": {
     "@playwright/test": "^1.43.1",
