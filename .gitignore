@@ -3,6 +3,8 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.local-browsers/
+allure-results/
+html/
 .env
 
 # OS-specific files
@@ -31,4 +33,3 @@ internal_disbursement.png
 !**/skills/**
 !**/knowledge/**
 !**/*.md
-
