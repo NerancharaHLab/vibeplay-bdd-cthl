@@ -17,7 +17,7 @@ export class LoginPage {
   }
 
   async goto() {
-    await this.page.goto('/cortex/welcome');
+    await this.page.goto('/cortex/welcome', { timeout: 60000 });
   }
 
   async login(username: string, password: string) {
@@ -29,17 +29,25 @@ export class LoginPage {
     }
 
     // 2. Handle Welcome Page if present
-    const welcomeBtn = this.page.locator('button:has-text("ลงชื่อเข้าใช้")');
-    try {
-      await welcomeBtn.waitFor({ state: 'visible', timeout: 5000 });
-      await welcomeBtn.click();
-      await this.page.waitForLoadState('domcontentloaded', { timeout: 10000 }).catch(() => {});
-    } catch (e) {
-      console.log('Welcome button not found or not clickable, skipping...');
+    const isWelcomePage = this.page.url().includes('/welcome') || (await this.page.locator('button:has-text("ลงชื่อเข้าใช้")').isVisible());
+    if (isWelcomePage) {
+      console.log('Welcome page detected. Waiting for "ลงชื่อเข้าใช้" button...');
+      const welcomeBtn = this.page.locator('button:has-text("ลงชื่อเข้าใช้")').first();
+      try {
+        await welcomeBtn.waitFor({ state: 'visible', timeout: 20000 });
+        await welcomeBtn.click();
+        console.log('Clicked welcome button.');
+        // Wait for Keycloak page to begin loading
+        await this.page.waitForLoadState('domcontentloaded', { timeout: 15000 }).catch(() => {});
+      } catch (e) {
+        console.log('Welcome button click failed:', e.message);
+      }
+    } else {
+      console.log('Not on welcome page, current URL:', this.page.url());
     }
 
     // 3. Login on Keycloak page
-    await this.usernameInput.waitFor({ state: 'visible', timeout: 20000 });
+    await this.usernameInput.waitFor({ state: 'visible', timeout: 60000 });
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
     

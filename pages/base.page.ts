@@ -27,4 +27,23 @@ export class BasePage {
     await locator.click();
     await this.page.locator(`text=${text}`).click();
   }
+
+  // Convenience helpers accepting CSS selector strings
+  async click(selector: string) {
+    const el = this.page.locator(selector).first();
+    await el.waitFor({ state: 'visible', timeout: 15000 });
+    await el.click();
+  }
+
+  async fill(selector: string, text: string) {
+    const el = this.page.locator(selector).first();
+    await el.waitFor({ state: 'visible', timeout: 15000 });
+    await el.fill(text);
+  }
+
+  async selectSource(source: string) {
+    const el = this.page.locator('#sourceType').first();
+    await el.click();
+    await this.page.locator(`.ant-select-item-option-content:has-text("${source}")`).first().click();
+  }
 }

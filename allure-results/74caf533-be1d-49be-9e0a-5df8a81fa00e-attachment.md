@@ -1,0 +1,110 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: new-cortex/create-medication.spec.ts >> Create Medication BDD Tests >> Create a medication by filling minimum required fields
+- Location: tests/new-cortex/create-medication.spec.ts:20:7
+
+# Error details
+
+```
+Test timeout of 60000ms exceeded while running "beforeEach" hook.
+```
+
+```
+Error: locator.waitFor: Test timeout of 60000ms exceeded.
+Call log:
+  - waiting for locator('#username') to be visible
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - img "logo" [ref=e5]
+  - heading "Welcome to CORTEX" [level=1] [ref=e6]:
+    - text: Welcome to
+    - strong [ref=e7]: CORTEX
+  - generic [ref=e8]: กรุณาลงชื่อเข้าใช้เพื่อเริ่มใช้งาน
+  - button "ลงชื่อเข้าใช้" [ref=e9] [cursor=pointer]:
+    - generic [ref=e10]: ลงชื่อเข้าใช้
+```
+
+# Test source
+
+```ts
+  1  | import { Page, Locator } from '@playwright/test';
+  2  | import { LoginLocators } from '../locators/login.locators';
+  3  | 
+  4  | export class LoginPage {
+  5  |   readonly page: Page;
+  6  |   readonly welcomeLoginButton: Locator;
+  7  |   readonly usernameInput: Locator;
+  8  |   readonly passwordInput: Locator;
+  9  |   readonly loginButton: Locator;
+  10 | 
+  11 |   constructor(page: Page) {
+  12 |     this.page = page;
+  13 |     this.welcomeLoginButton = page.locator(LoginLocators.welcomeLoginButton);
+  14 |     this.usernameInput = page.locator(LoginLocators.usernameInput);
+  15 |     this.passwordInput = page.locator(LoginLocators.passwordInput);
+  16 |     this.loginButton = page.locator(LoginLocators.loginButton);
+  17 |   }
+  18 | 
+  19 |   async goto() {
+  20 |     await this.page.goto('/cortex/welcome', { timeout: 60000 });
+  21 |   }
+  22 | 
+  23 |   async login(username: string, password: string) {
+  24 |     // 1. Wait for page to be ready - use domcontentloaded instead of networkidle
+  25 |     try {
+  26 |       await this.page.waitForLoadState('domcontentloaded', { timeout: 15000 });
+  27 |     } catch (e) {
+  28 |       console.log('Page load timed out, continuing anyway...');
+  29 |     }
+  30 | 
+  31 |     // 2. Handle Welcome Page if present
+  32 |     const welcomeBtn = this.page.locator('button:has-text("ลงชื่อเข้าใช้")');
+  33 |     try {
+  34 |       await welcomeBtn.waitFor({ state: 'visible', timeout: 5000 });
+  35 |       await welcomeBtn.click();
+  36 |       await this.page.waitForLoadState('domcontentloaded', { timeout: 10000 }).catch(() => {});
+  37 |     } catch (e) {
+  38 |       console.log('Welcome button not found or not clickable, skipping...');
+  39 |     }
+  40 | 
+  41 |     // 3. Login on Keycloak page
+> 42 |     await this.usernameInput.waitFor({ state: 'visible', timeout: 60000 });
+     |                              ^ Error: locator.waitFor: Test timeout of 60000ms exceeded.
+  43 |     await this.usernameInput.fill(username);
+  44 |     await this.passwordInput.fill(password);
+  45 |     
+  46 |     // 4. Click login button and wait for navigation
+  47 |     await this.loginButton.click();
+  48 |     
+  49 |     // 5. Wait for either the app to load or URL with code parameter (Keycloak callback)
+  50 |     try {
+  51 |       await this.page.waitForURL(/.*cortex\/apps|.*code=/, { timeout: 45000 });
+  52 |     } catch (e) {
+  53 |       console.log('URL wait failed, checking for layout element...');
+  54 |     }
+  55 |     
+  56 |     // 6. Final fallback: wait for app layout to appear
+  57 |     try {
+  58 |       await this.page.locator('.ant-layout, [class*="layout"], body.ng-scope').first().waitFor({ state: 'visible', timeout: 20000 }).catch(() => {});
+  59 |     } catch (e) {
+  60 |       console.log('Layout element wait failed');
+  61 |     }
+  62 |   }
+  63 | 
+  64 |   async isVisible() {
+  65 |     return await this.usernameInput.isVisible();
+  66 |   }
+  67 | }
+  68 | 
+```

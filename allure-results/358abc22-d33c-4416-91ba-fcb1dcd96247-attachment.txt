@@ -1,0 +1,31 @@
+Logged in. Waiting for dashboard apps to load...
+Clicking ห้องยา card
+Checking for location selection dialog...
+Location dialog found. Selecting "ห้อง A ชั้น 1"...
+Scanning for dropdown options...
+Found 7 options in dropdown
+Option 0: "14"
+Option 1: "15"
+Option 2: "ห้องยา ชั้น 1 อาคารราชนครินทร์"
+Option 3: "ห้องยา Travel Clinic"
+Option 4: "ห้องยาทดสอบ"
+Option 5: "ห้องยา A"
+Option 6: "ห้องยาชั้น 1"
+Filling room name "ห้องยา A"...
+Selected "ห้องยา A" successfully.
+Submitted location selection.
+Clicking hamburger menu (menu-fold)...
+Clicked hamburger menu!
+Looking for Medication Master menu...
+Clicking Medication master menu item
+Looking for create button
+Looking for tabs to click...
+Found 7 tabs
+Clicking tab 0
+Clicking tab 1
+Clicking tab 2
+Clicking tab 3
+Clicking tab 4
+Clicking tab 5
+Clicking tab 6
+Dumping DOM...

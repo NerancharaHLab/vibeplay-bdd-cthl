@@ -1,0 +1,20 @@
+Logged in. Waiting for dashboard...
+Clicking ห้องยา
+Clicking hamburger menu (menu-fold)...
+Could not click hamburger menu. Proceeding anyway... locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('button:has(.anticon-menu-fold), button:has(.anticon-menu-unfold), ._collapse-trigger-button_ljzrg_69').first()
+
+Clicking Medication master
+Could not click Medication master locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for locator('div,span,a,li').filter({ hasText: 'Medication master' }).first() to be visible
+
+Looking for create button
+Could not find create button. locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('button').filter({ hasText: /(Create|เพิ่ม)/i }).first() to be visible
+
+Looking for tabs to click...
+Found 0 tabs
+Dumping DOM...

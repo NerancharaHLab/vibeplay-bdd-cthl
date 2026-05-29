@@ -1,0 +1,39 @@
+Logged in. Waiting for dashboard apps to load...
+Clicking ห้องยา card
+Checking for location selection dialog...
+Location dialog found. Selecting "ห้อง A ชั้น 1"...
+Filling room name "ห้อง A ชั้น 1"...
+Could not click option dropdown content, pressing Enter key... locator.waitFor: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator('.ant-select-item-option-content').filter({ hasText: 'ห้อง A ชั้น 1' }).first() to be visible
+
+Error handling location dialog: locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('[data-testid="submit-select-location"], button:has-text("ส่ง")').first()
+    - locator resolved to <button disabled type="button" data-testid="submit-select-location" class="ant-btn css-1uga22k css-var-_r_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg _submit-button_voxfq_26">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+      - waiting 100ms
+    19 × waiting for element to be visible, enabled and stable
+       - element is not enabled
+     - retrying click action
+       - waiting 500ms
+
+Clicking hamburger menu (menu-fold)...
+Clicked hamburger menu!
+Looking for Medication Master menu...
+Clicking Medication master menu item
+Looking for create button
+Could not find create button. locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('button').filter({ hasText: /(Create|เพิ่ม|Create medication master)/i }).first() to be visible
+
+Looking for tabs to click...
+Found 0 tabs
+Dumping DOM...

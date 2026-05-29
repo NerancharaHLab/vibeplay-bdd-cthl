@@ -18,6 +18,8 @@
     "test:new-cortex:login": "node skills/run.js new-cortex login",
     "test:new-cortex:medical-record": "node skills/run.js new-cortex medical-record",
     "test:new-cortex:medical-record-search": "node skills/run.js new-cortex medical-record-search",
+    "test:new-cortex:medication-master": "node skills/run.js new-cortex medication-master",
+    "test:new-cortex:create-medication": "node skills/run.js new-cortex create-medication",
     "test:new-cortex:advance-visits": "node skills/run.js new-cortex advance-visits",
     "test:tmh:login": "node skills/run.js tmh login",
     "test:sbh:login": "node skills/run.js sbh login",
