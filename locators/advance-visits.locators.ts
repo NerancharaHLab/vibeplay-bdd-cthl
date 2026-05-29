@@ -11,4 +11,8 @@ export const AdvanceVisitsLocators = {
   
   // Page Title (for verification)
   pageTitle: 'h1:has-text("เปิด Visit ผู้ป่วยนัด")',
+
+  // Dynamic Locators
+  patientRow: (patientName: string) => `tr:has-text("${patientName}")`,
+  tableCell: (text: string) => `td:has-text("${text}")`,
 };

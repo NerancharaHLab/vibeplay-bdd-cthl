@@ -16,7 +16,9 @@ if (selectedUsers.length === 0) {
 
 test.describe('SBH Cortex Cloud Login BDD Tests', () => {
   for (const user of selectedUsers) {
-    test(`Login test for user: ${user.username}`, async ({ page }) => {
+    test(`Login test for user: ${user.username}`, {
+      tag: ['@functional', '@login', '@sbh', '@regression']
+    }, async ({ page }) => {
       const steps = new LoginSteps(page);
 
       await steps.givenUserIsOnLoginPage();

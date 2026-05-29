@@ -41,4 +41,18 @@ export class AdvanceVisitsSteps {
       await expect(this.advanceVisitsPage.doctorSelect).toBeVisible();
     });
   }
+
+  async whenUserFillsFilters(date: string, clinic?: string, doctor?: string) {
+    await test.step(`When user fills filters: Date=${date}, Clinic=${clinic}, Doctor=${doctor}`, async () => {
+      await this.advanceVisitsPage.searchWithFilters(date, clinic, doctor);
+    });
+  }
+
+  async thenShouldSeePatientInList(patientName: string) {
+    await test.step(`Then they should see patient "${patientName}" in the result list`, async () => {
+      const { AdvanceVisitsLocators } = await import('../../locators/advance-visits.locators');
+      const row = this.page.locator(AdvanceVisitsLocators.patientRow(patientName));
+      await expect(row).toBeVisible();
+    });
+  }
 }

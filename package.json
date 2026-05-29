@@ -5,6 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:tags": "npx playwright test --grep",
+    "test:regression": "npx playwright test --grep @regression",
+    "test:functional": "npx playwright test --grep @functional",
+    "test:ui": "npx playwright test --grep @ui",
+    "allure:generate": "npx allure generate ./allure-results --clean",
+    "allure:open": "npx allure open ./allure-report",
+    "allure:serve": "npx allure serve ./allure-results",
     "test:site": "node skills/run.js",
     "site:module": "node skills/run.js site:module",
     "site:testcase": "node skills/run.js site:testcase",
@@ -19,6 +26,8 @@
   "devDependencies": {
     "@playwright/test": "^1.43.1",
     "@types/node": "^20.12.7",
+    "allure-commandline": "^2.42.0",
+    "allure-playwright": "^3.9.0",
     "typescript": "^5.4.5"
   },
   "dependencies": {

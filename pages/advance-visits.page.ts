@@ -1,8 +1,8 @@
 import { Page, Locator } from '@playwright/test';
 import { AdvanceVisitsLocators } from '../locators/advance-visits.locators';
+import { BasePage } from './base.page';
 
-export class AdvanceVisitsPage {
-  readonly page: Page;
+export class AdvanceVisitsPage extends BasePage {
   readonly dateInput: Locator;
   readonly clinicSelect: Locator;
   readonly doctorSelect: Locator;
@@ -10,7 +10,7 @@ export class AdvanceVisitsPage {
   readonly addButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.dateInput = page.locator(AdvanceVisitsLocators.appointmentDate);
     this.clinicSelect = page.locator(AdvanceVisitsLocators.clinicSelect);
     this.doctorSelect = page.locator(AdvanceVisitsLocators.doctorSelect);
@@ -19,12 +19,17 @@ export class AdvanceVisitsPage {
   }
 
   async goto() {
-    // Navigate directly to the advance-visits URL from the screenshot
-    await this.page.goto('/cortex/reception/advance-visits');
+    await super.goto('/cortex/reception/advance-visits');
   }
 
-  async searchWithFilters(date: string) {
-    await this.dateInput.fill(date);
-    await this.searchButton.click();
+  async searchWithFilters(date: string, clinic?: string, doctor?: string) {
+    await this.fillInput(this.dateInput, date);
+    if (clinic) {
+      await this.selectOption(this.clinicSelect, clinic);
+    }
+    if (doctor) {
+      await this.selectOption(this.doctorSelect, doctor);
+    }
+    await this.clickElement(this.searchButton);
   }
 }
