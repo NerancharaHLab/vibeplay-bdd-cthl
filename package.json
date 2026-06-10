@@ -1,7 +1,7 @@
 {
-  "name": "cortex-automate-test",
+  "name": "vibeplay-bdd-cthl",
   "version": "1.0.0",
-  "description": "Automated tests for Cortex Cloud",
+  "description": "BDD Automated Test Suite for Cortex, HLab using Playwright",
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
