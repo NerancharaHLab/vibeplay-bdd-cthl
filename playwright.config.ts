@@ -8,7 +8,7 @@ export default defineConfig({
   retries: 0,
   reporter: 'html',
   use: {
-    baseURL: 'https://dev-x.cortexcloud.co',
+    baseURL: 'https://dev-x.cortexcloud.co/cortex/welcome',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
