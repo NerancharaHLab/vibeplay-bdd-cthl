@@ -25,10 +25,10 @@ export class RegistrationPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.iframe = page.frameLocator('iframe').first();
+    this.iframe = page.frameLocator(RegistrationLocators.iframe).first();
 
     // Create patient elements
-    this.createNewPatientButton = this.iframe.locator(RegistrationLocators.createNewPatientButton);
+    this.createNewPatientButton = this.iframe.getByTestId('create-patient-button');
     this.firstNameInput = page.locator(RegistrationLocators.firstNameInput);
     this.lastNameInput = page.locator(RegistrationLocators.lastNameInput);
     this.idCardInput = page.locator(RegistrationLocators.idCardInput);

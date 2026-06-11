@@ -1,7 +1,7 @@
 export const RegistrationLocators = {
   // --- Create Patient (สร้างผู้ป่วยใหม่) ---
-  iframe: 'iframe',
-  createNewPatientButton: '[data-testid="create-patient-button"], button:has-text("สร้างผู้ป่วยใหม่")',
+  iframe: 'iframe[title="iframe"]',
+  createNewPatientButton: '[data-testid="create-patient-button"]',
   firstNameInput: 'input[placeholder="ชื่อ"]',
   lastNameInput: 'input[placeholder="นามสกุล"]',
   idCardInput: 'input[placeholder="รหัสบัตรประชาชน/Passport"], input[placeholder="เลขบัตรประจำตัวประชาชน"]',
