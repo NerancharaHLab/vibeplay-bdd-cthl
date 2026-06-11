@@ -42,59 +42,87 @@
 ```
 vibeplay-bdd-cthl/
 ├── tests/                          # Tier 1 — Spec files (thin loops)
-│   ├── new-cortex/                 #   grouped by site
-│   │   ├── login/
-│   │   ├── medical-record/
-│   │   ├── reception/
-│   │   ├── claim/
-│   │   ├── medication.spec.ts
-│   │   ├── registration.spec.ts
-│   │   └── ipd-orders.spec.ts
+│   ├── new-cortex/                 #   flat per module
+│   │   ├── login.spec.ts
+│   │   ├── medical-record.spec.ts
+│   │   ├── opd.spec.ts
+│   │   ├── ipd.spec.ts
+│   │   ├── pharmacy.spec.ts
+│   │   └── claim.spec.ts
 │   ├── tmh/
+│   │   └── login.spec.ts
 │   ├── sbh/
+│   │   ├── login.spec.ts
+│   │   └── registration.spec.ts
 │   └── nuh/
+│       └── login.spec.ts
 │
 ├── steps/                          # Tier 2 — BDD Step Definitions
-│   ├── new-cortex/                 #   each module has a .steps.ts
-│   │   ├── login/
-│   │   ├── medical-record/
-│   │   ├── reception/
-│   │   ├── claim/
-│   │   ├── medication.steps.ts
-│   │   ├── registration.steps.ts
-│   │   └── ipd-orders.steps.ts
+│   ├── new-cortex/                 #   flat per module
+│   │   ├── login.steps.ts
+│   │   ├── medical-record.steps.ts
+│   │   ├── opd.steps.ts
+│   │   ├── ipd.steps.ts
+│   │   ├── pharmacy.steps.ts
+│   │   └── claim.steps.ts
 │   ├── sbh/
+│   │   ├── login.steps.ts
+│   │   └── registration.steps.ts
 │   ├── tmh/
+│   │   └── login.steps.ts
 │   ├── nuh/
+│   │   └── login.steps.ts
 │   └── shared/                     #   reusable steps (auth, navigation)
 │       ├── auth.steps.ts
 │       └── navigation.steps.ts
 │
 ├── pages/                          # Tier 3 — Page Object Models (POM)
 │   ├── base.page.ts                #   base class with common methods
-│   ├── new-cortex/
-│   │   ├── login/
-│   │   ├── medical-record/
-│   │   └── reception/
+│   ├── new-cortex/                 #   flat per module
+│   │   ├── apps.page.ts
+│   │   ├── login.page.ts
+│   │   ├── medical-record.page.ts
+│   │   ├── opd.page.ts
+│   │   ├── ipd.page.ts
+│   │   ├── pharmacy.page.ts
+│   │   └── claim.page.ts
 │   ├── sbh/
+│   │   ├── login.page.ts
+│   │   └── registration.page.ts
 │   ├── tmh/
+│   │   └── login.page.ts
 │   └── nuh/
+│       └── login.page.ts
 │
 ├── data/                           # Test case data (data-driven)
-│   ├── advance-visits.data.ts
+│   ├── login.data.ts
 │   ├── medical-record.data.ts
-│   ├── medication.data.ts
-│   ├── ipd-orders.data.ts
-│   └── registration-sbh.data.ts
+│   ├── opd.data.ts
+│   ├── ipd.data.ts
+│   ├── pharmacy.data.ts
+│   ├── claim.data.ts
+│   └── registration.data.ts
 │
-├── locators/                       # UI selectors (CSS/XPath)
-│   ├── new-cortex/
-│   ├── sbh/
-│   └── *.locators.ts
+├── locators/                       # UI selectors (flat per module)
+│   ├── login.locators.ts
+│   ├── medical-record.locators.ts
+│   ├── opd-apps.locators.ts
+│   ├── opd.locators.ts
+│   ├── ipd.locators.ts
+│   ├── pharmacy.locators.ts
+│   ├── claim.locators.ts
+│   ├── sbh-login.locators.ts
+│   ├── tmh-login.locators.ts
+│   └── nuh-login.locators.ts
 │
 ├── bdd-scenarios/                  # QA-written BDD specs (Markdown)
 │   ├── new-cortex/
-│   ├── sbh/
+│   │   ├── login.md
+│   │   ├── medical-record.md
+│   │   ├── opd.md
+│   │   ├── ipd.md
+│   │   ├── pharmacy.md
+│   │   └── claim.md
 │   └── ...
 │
 ├── utils/                          # Shared utilities

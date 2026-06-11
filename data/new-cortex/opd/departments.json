@@ -1,0 +1,44 @@
+[
+  {
+    "id": "AV-001",
+    "name": "Verify UI elements on Advance Visits page",
+    "feature": "Advance Visits UI",
+    "role": "super",
+    "action": "verify-ui",
+    "expect": "ui-elements-visible",
+    "tags": ["@functional", "@advance-visits", "@new-cortex", "@regression", "@ui"]
+  },
+  {
+    "id": "AV-002",
+    "name": "Check Filter inputs visibility",
+    "feature": "Advance Visits UI",
+    "role": "super",
+    "action": "verify-filters-ui",
+    "expect": "filter-fields-visible",
+    "tags": ["@functional", "@advance-visits", "@new-cortex", "@regression", "@ui"]
+  },
+  {
+    "id": "AV-003-001",
+    "name": "Filter by Medicine Clinic",
+    "feature": "Advance Visits Filter",
+    "role": "super",
+    "action": "filter-visits",
+    "targetDate": "25/05/2026",
+    "clinicName": "คลินิกอายุรกรรม",
+    "doctorName": "นพ.สมชาย ตั้งใจรักษา",
+    "expect": "results-filtered",
+    "tags": ["@functional", "@advance-visits", "@new-cortex", "@regression", "@filter"]
+  },
+  {
+    "id": "AV-003-002",
+    "name": "Filter by Pediatric Clinic",
+    "feature": "Advance Visits Filter",
+    "role": "super",
+    "action": "filter-visits",
+    "targetDate": "01/06/2026",
+    "clinicName": "คลินิกกุมารเวช",
+    "doctorName": "พญ.สมศรี รักดี",
+    "expect": "results-filtered",
+    "tags": ["@functional", "@advance-visits", "@new-cortex", "@regression", "@filter"]
+  }
+]

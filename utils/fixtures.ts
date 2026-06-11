@@ -1,13 +1,12 @@
 import { test as baseTest } from '@playwright/test';
 import { AuthSteps } from '../steps/shared/auth.steps';
 import { NavigationSteps } from '../steps/shared/navigation.steps';
-import { AdvanceVisitsSteps } from '../steps/new-cortex/advance-visits.steps';
-import { IpdOrdersSteps } from '../steps/new-cortex/ipd-orders.steps';
+import { OpdSteps } from '../steps/new-cortex/opd.steps';
+import { IpdSteps } from '../steps/new-cortex/ipd.steps';
 import { MedicalRecordSteps } from '../steps/new-cortex/medical-record.steps';
-import { MedicationSteps } from '../steps/new-cortex/medication.steps';
+import { PharmacySteps } from '../steps/new-cortex/pharmacy.steps';
 import { RegistrationSbhSteps } from '../steps/sbh/registration.steps';
-import { RegistrationNewCortexSteps } from '../steps/new-cortex/registration.steps';
-
+import { ClaimSteps } from '../steps/new-cortex/claim.steps';
 
 /**
  * Unified test fixtures — register all step classes here once.
@@ -16,12 +15,12 @@ import { RegistrationNewCortexSteps } from '../steps/new-cortex/registration.ste
 type AllFixtures = {
   auth: AuthSteps;
   nav: NavigationSteps;
-  advanceVisitsSteps: AdvanceVisitsSteps;
-  ipdOrdersSteps: IpdOrdersSteps;
+  opdSteps: OpdSteps;
+  ipdSteps: IpdSteps;
   medicalRecordSteps: MedicalRecordSteps;
-  medicationSteps: MedicationSteps;
+  pharmacySteps: PharmacySteps;
   registrationSbhSteps: RegistrationSbhSteps;
-  registrationNewCortexSteps: RegistrationNewCortexSteps;
+  claimSteps: ClaimSteps;
 };
 
 export const test = baseTest.extend<AllFixtures>({
@@ -31,23 +30,23 @@ export const test = baseTest.extend<AllFixtures>({
   nav: async ({ page }, use) => {
     await use(new NavigationSteps(page));
   },
-  advanceVisitsSteps: async ({ page }, use) => {
-    await use(new AdvanceVisitsSteps(page));
+  opdSteps: async ({ page }, use) => {
+    await use(new OpdSteps(page));
   },
-  ipdOrdersSteps: async ({ page }, use) => {
-    await use(new IpdOrdersSteps(page));
+  ipdSteps: async ({ page }, use) => {
+    await use(new IpdSteps(page));
   },
   medicalRecordSteps: async ({ page }, use) => {
     await use(new MedicalRecordSteps(page));
   },
-  medicationSteps: async ({ page }, use) => {
-    await use(new MedicationSteps(page));
+  pharmacySteps: async ({ page }, use) => {
+    await use(new PharmacySteps(page));
   },
   registrationSbhSteps: async ({ page }, use) => {
     await use(new RegistrationSbhSteps(page));
   },
-  registrationNewCortexSteps: async ({ page }, use) => {
-    await use(new RegistrationNewCortexSteps(page));
+  claimSteps: async ({ page }, use) => {
+    await use(new ClaimSteps(page));
   },
 });
 

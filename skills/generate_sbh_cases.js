@@ -331,8 +331,8 @@ export const RegistrationSbhTestCases: RegistrationSbhTestCase[] = [
 
   code += `];\n`;
 
-  fs.writeFileSync(path.join(__dirname, '..', 'data', 'registration-sbh.data.ts'), code);
-  console.log(`✅ Generated ${testCases.length} cases with full tags into data/registration-sbh.data.ts`);
+  fs.writeFileSync(path.join(__dirname, '..', 'data', 'registration.data.ts'), code);
+  console.log(`✅ Generated ${testCases.length} cases with full tags into data/registration.data.ts`);
 }
 
 generateCases().catch(console.error);

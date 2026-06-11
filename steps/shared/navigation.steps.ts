@@ -1,27 +1,27 @@
 import { Page, test } from '@playwright/test';
-import { IpdOrdersPage } from '../../pages/ipd-orders.page';
+import { IpdPage } from '../../pages/new-cortex/ipd.page';
 import { getRoute } from '../../utils/test-helpers';
 
 /**
  * Shared navigation steps — common navigation flows reusable across modules.
  */
 export class NavigationSteps {
-  private ipdOrdersPage: IpdOrdersPage;
+  private ipdPage: IpdPage;
 
   constructor(private page: Page) {
-    this.ipdOrdersPage = new IpdOrdersPage(page);
+    this.ipdPage = new IpdPage(page);
   }
 
   async openPatientWorkspace(hn: string, ward: string) {
     await test.step(`When the user opens patient workspace HN "${hn}" in ward "${ward}"`, async () => {
-      await this.ipdOrdersPage.navigateToIpdSelectWard();
-      await this.ipdOrdersPage.selectWardAndPatient(ward, hn);
+      await this.ipdPage.navigateToIpdSelectWard();
+      await this.ipdPage.selectWardAndPatient(ward, hn);
     });
   }
 
   async navigateToIpdSummary() {
     await test.step('And the user navigates to the IPD Summary page', async () => {
-      await this.ipdOrdersPage.openIpdSummary();
+      await this.ipdPage.openIpdSummary();
     });
   }
 
