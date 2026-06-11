@@ -12,6 +12,6 @@ export class AppsPage {
 
   async openMedicalRecord() {
     await this.medicalRecordCard.click();
-    await this.page.waitForURL(/.*(cortex\/medical-record|medical-record)/);
+    await this.page.waitForURL(/.*(cortex\/medical-record|medical-record|search-patient)/);
   }
 }
