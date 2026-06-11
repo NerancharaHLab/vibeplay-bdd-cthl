@@ -21,8 +21,10 @@
     "test:new-cortex:medication-master": "node skills/run.js new-cortex medication-master",
     "test:new-cortex:create-medication": "node skills/run.js new-cortex create-medication",
     "test:new-cortex:advance-visits": "node skills/run.js new-cortex advance-visits",
+    "test:new-cortex:registration": "node skills/run.js new-cortex registration",
     "test:tmh:login": "node skills/run.js tmh login",
     "test:sbh:login": "node skills/run.js sbh login",
+    "test:sbh:registration": "node skills/run.js sbh registration",
     "test:nuh:login": "node skills/run.js nuh login"
   },
   "devDependencies": {

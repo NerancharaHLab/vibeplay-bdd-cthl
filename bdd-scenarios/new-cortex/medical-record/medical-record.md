@@ -1,106 +1,60 @@
-# BDD Scenarios: Medical Record / สร้างประวัติและแก้ไขข้อมูลผู้ป่วย (New Cortex)
+# BDD Scenarios: Medical Record (New Cortex)
 
-พื้นที่สำหรับทีม QA ในการดูตัวอย่าง ออกแบบ และจัดการเคสทดสอบโมดูลเวชระเบียนที่แมปตามไฟล์ `TEST_CASES_MEDICAL_RECORD.md` พร้อมตารางตรวจสอบพารามิเตอร์ของข้อมูลทดสอบ (Parameters & Data Mapping)
-
----
-
-## 1. เคสทดสอบที่ผ่านการเขียนสคริปต์อัตโนมัติแล้ว (Automated Scenarios)
-
-### 🚩 MR-003 (Functional): บันทึกข้อมูลผู้ป่วยใหม่สำเร็จ (Happy Path)
-*คำอธิบาย:* ตรวจสอบความถูกต้องของการป้อนประวัติผู้ป่วยใหม่ด้วยข้อมูลจำลอง ร่วมกับรหัสประจำตัวประชาชน 13 หลักที่สุ่มสร้างขึ้นมาอย่างถูกต้องตามโครงสร้างข้อมูล
-
-* **Given** ทีมงานล็อกอินเข้าสู่ระบบ Cortex Cloud ด้วยสิทธิ์การใช้งานระดับ **"<role>"** (`Given the user is logged in to Cortex Cloud as a super user`)
-* **When** ผู้ใช้นำทางเข้าสู่หน้าจอโมดูลระบบงานเวชระเบียน (`When the user navigates to the Medical Record application`)
-* **And** ทำการกดคลิกปุ่มเพื่อเริ่มขั้นตอน "สร้างประวัติผู้ป่วยใหม่" (`And the user starts creating a new patient record`)
-* **And** ป้อนข้อมูลผู้ป่วยโดยมี ชื่อจริงเป็น **"<first_name>"**, นามสกุลเป็น **"<last_name>"** พร้อมระบบรันคำนวณสุ่มรหัสบัตรประชาชน 13 หลักอัตโนมัติ **"<id_card_no>"** (`And fills in the patient name, last name, and a generated ID card number`)
-* **Then** ช่องสำหรับกรอกข้อมูลบนหน้าจอระบบจะต้องแสดงค่า ชื่อจริง, นามสกุล และเลขบัตรประชาชน 13 หลักตรงตามพารามิเตอร์อย่างถูกต้องและครบถ้วน (`Then the input fields should display the entered patient information correctly`)
+## Feature: Create & Edit Patient Record
+As a Medical Record staff
+I want to create and edit patient records
+So that the hospital database stays accurate and up-to-date
 
 ---
 
-## 📊 ตารางตรวจสอบพารามิเตอร์สำหรับเคสอัตโนมัติ (Automated Parameters Reference)
+## Automated Scenarios
 
-| ตัวแปรพารามิเตอร์ | ประเภทข้อมูล | แหล่งที่มาของข้อมูล | ตัวอย่างชุดข้อมูลทดสอบ | คำอธิบายและฟังก์ชันการใช้งานในโค้ด |
-| :--- | :--- | :--- | :--- | :--- |
-| **`<role>`** | String (สิทธิ์เข้าใช้งาน) | ระบบจัดสิทธิ์อัตโนมัติ | `super` (Super User) | ดึงข้อมูลบัญชีผ่านระบบ `getUserByRole(undefined, 'super')` |
-| **`<first_name>`** | String (ชื่อจริงผู้ป่วย) | Hardcoded ใน Step | `TestName` | ถูกส่งไปกรอกที่ฟิลด์อินพุตชื่อจริงผ่านฟังก์ชัน `fillPatientInfo` |
-| **`<last_name>`** | String (นามสกุลผู้ป่วย) | Hardcoded ใน Step | `TestLastName` | ถูกส่งไปกรอกที่ฟิลด์อินพุตนามสกุลผ่านฟังก์ชัน `fillPatientInfo` |
-| **`<id_card_no>`** | String (เลขบัตรประชาชน) | Dynamic (สร้างจากโค้ด) | *เลขสุ่ม 13 หลัก (เช่น 1101501234567)* | คำนวณรหัสทดสอบอัตโนมัติด้วยโมดูล [generateThaiID()](file:///Users/neranchara/Jobs/Vibe%20code%20Automate%20Test/utils/test-helpers.ts) ซึ่งถูกต้องตามหลักเช็คซัมคณิตศาสตร์ของกระทรวงมหาดไทย |
-
----
-
-## 2. ตัวอย่าง BDD สำหรับเคสทดสอบอื่นในแผนงาน (QA Backlog & Manual Scenarios)
-
-> [!NOTE]
-> ด้านล่างนี้คือการแปลงเคสทดสอบในไฟล์เวชระเบียนที่เหลือทั้งหมดให้กลายเป็นรูปแบบ BDD (Given-When-Then) พร้อมระบบพารามิเตอร์ตัวแปร เพื่อให้ทีม QA นำไปศึกษาและประยุกต์ใช้งานในการป้อนเงื่อนไขการทดสอบต่างๆ ได้ง่ายขึ้น
-
-### 🚩 MR-001 (UI): ตรวจสอบความครบถ้วนขององค์ประกอบในหน้าสร้างประวัติ
-*คำอธิบาย:* ตรวจสอบการแสดงผลของหน้าจอป้อนข้อมูลผู้ป่วยใหม่ว่ามีปุ่มและช่องกรอกข้อมูลสำคัญแสดงขึ้นครบถ้วนหรือไม่
-
-* **Given** ผู้ใช้งานเข้าสู่หน้าจอสร้างประวัติผู้ป่วยใหม่ (Create New Patient Page) ด้วยสิทธิ์ **"<role>"**
-* **Then** อินพุตสำหรับพิมพ์ข้อมูลสำคัญ ได้แก่ **"<field_first_name>"**, **"<field_last_name>"** และ **"<field_id_card>"** จะต้องแสดงขึ้นมาบนจอ
-* **And** ปุ่มบันทึก **"<btn_save>"** และปุ่มยกเลิก **"<btn_cancel>"** จะต้องอยู่ในสถานะแสดงผลพร้อมใช้งาน
-
-### 🚩 MR-002 (UI): ตรวจสอบการแสดงผล Error Message เมื่อไม่ได้กรอกฟิลด์ที่จำเป็น (Mandatory Fields)
-*คำอธิบาย:* ตรวจสอบระบบดักจับการกรอกข้อมูล (Validation) โดยปล่อยช่องเว้นว่างแล้วกดบันทึก
-
-* **Given** ผู้ใช้งานอยู่ในหน้าจอสร้างประวัติผู้ป่วยใหม่
-* **When** ทำการเว้นช่องกรอกข้อมูลสำคัญเป็นค่าว่างทั้งหมด **"<empty_fields>"**
-* **And** พยายามคลิกปุ่มบันทึกข้อมูล **"<btn_save>"**
-* **Then** ระบบส่วนอินเตอร์เฟซจะต้องแสดงข้อความเตือนผิดพลาด **"<validation_error>"**
-* **And** ระบบจะต้องยังคงค้างอยู่ที่หน้าเดิมและไม่อนุญาตให้เซฟข้อมูลลงดาต้าเบส
-
-### 🚩 MR-004 (Functional): ตรวจสอบการแจ้งเตือนเมื่อกรอกเลขบัตรประชาชนซ้ำในระบบ
-*คำอธิบาย:* ตรวจสอบระบบป้องกันการกรอกเลขประจำตัวประชาชนซ้ำซ้อนเพื่อความถูกต้องของข้อมูลฐานข้อมูล
-
-* **Given** ระบบมีบัญชีข้อมูลผู้ป่วยที่มีเลขประจำตัวประชาชนเป็น **"<existing_id>"** อยู่แล้วในฐานข้อมูล
-* **When** ผู้ใช้งานเปิดหน้าจอลงทะเบียนประวัติและกรอกค่าเลขบัตรประชาชนเป็น **"<existing_id>"**
-* **And** ป้อนข้อมูลสำคัญอื่นๆ ครบถ้วนแล้วกดบันทึกข้อมูล
-* **Then** ระบบจะต้องแสดงป็อปอัพแจ้งเตือนข้อผิดพลาดระบุข้อความ **"<duplicate_warning_msg>"**
-* **And** ระบบจะต้องไม่อนุญาตให้ทำการสร้างประวัติผู้ป่วยซ้ำนี้สำเร็จ
-
-### 🚩 MR-005 (Functional): ตรวจสอบการทำงานของปุ่ม "อ่านบัตรประชาชน" (Smart Card)
-*คำอธิบาย:* ทดสอบการตอบรับการทำงานร่วมกันกับอุปกรณ์ Smart Card Reader เพื่อประหยัดเวลาการกรอกข้อมูล
-
-* **Given** เครื่องคอมพิวเตอร์ทดสอบมีไดรเวอร์ตัวอ่านการ์ดพร้อมใช้งานและเชื่อมต่อเครื่องอ่าน **"<card_reader_model>"** เรียบร้อยแล้ว
-* **When** เสียบบัตรประชาชนเข้าไปในตัวเครื่อง และกดปุ่ม **"<btn_smartcard>"** บนระบบ
-* **Then** ข้อมูลจริงจากบัตรประชาชน ได้แก่ ชื่อ **"<expected_card_name>"**, นามสกุล **"<expected_card_lastname>"** และเลข 13 หลัก **"<expected_card_id>"** จะต้องถูกป้อนลงในหน้าจออินพุตฟิลด์โดยอัตโนมัติ
-
-### 🚩 MR-010 (Functional): การแก้ไขข้อมูลที่อยู่และเบอร์โทรศัพท์ติดต่อ (Edit Profile)
-*คำอธิบาย:* ตรวจสอบว่าระบบสามารถบันทึกการอัปเดตข้อมูลรายละเอียดส่วนตัวที่อยู่และการติดต่อได้อย่างถูกต้อง
-
-* **Given** ผู้ใช้อยู่ในหน้ารายละเอียดโปรไฟล์ของผู้ป่วยรายหนึ่งที่มีรหัสประจำตัว HN เป็น **"<patient_hn>"**
-* **When** ทำการกดปุ่มเพื่อเข้าสู่โหมด "แก้ไขข้อมูลผู้ป่วย" (Edit Profile)
-* **And** แก้ไขค่าในช่องโทรศัพท์เป็นหมายเลข **"<new_telephone>"** และป้อนข้อความที่อยู่ใหม่ในช่องที่อยู่เป็น **"<new_address>"**
-* **And** กดบันทึกข้อมูลการแก้ไข
-* **Then** ระบบจะแสดงผลข้อความแจ้งเตือนสีเขียวว่า **"<success_message>"**
-* **And** เมื่อระบบดึงข้อมูลผู้ป่วยรายนี้อีกครั้ง จะต้องแสดงข้อมูลโทรศัพท์เป็น **"<new_telephone>"** และที่อยู่เป็น **"<new_address>"** อย่างถูกต้อง
-
-### 🚩 MR-011 (Functional): แก้ไขผู้ติดต่อฉุกเฉิน (Emergency Contact)
-*คำอธิบาย:* ตรวจสอบการเพิ่ม/แก้ไขประวัติข้อมูลบุคคลอ้างอิงฉุกเฉินสำหรับผู้ป่วย
-
-* **Given** ผู้ใช้อยู่ในหน้าจอแก้ไขประวัติผู้ป่วยรายหนึ่งที่มีรหัสประจำตัว HN เป็น **"<patient_hn>"**
-* **When** ค้นหาและป้อนข้อมูลในกลุ่มข้อมูลผู้ติดต่อฉุกเฉิน โดยระบุชื่อผู้ติดต่อเป็น **"<emergency_contact_name>"**, มีความสัมพันธ์เป็น **"<emergency_relationship>"** และระบุเบอร์โทรศัพท์ **"<emergency_phone>"**
-* **And** กดบันทึกข้อมูล
-* **Then** ตารางข้อมูลผู้ติดต่อฉุกเฉินจะอัปเดตและแสดงข้อมูล **"<emergency_contact_name>"** ขึ้นมาในระบบ
-
-### 🚩 MR-012 (UI/Functional): ตรวจสอบประวัติการแก้ไขข้อมูล (Audit Trail)
-*คำอธิบาย:* ตรวจสอบการบันทึกประวัติความเคลื่อนไหว (Audit Logs) เพื่อความปลอดภัยและการตรวจสอบระบบย้อนหลัง
-
-* **Given** ผู้ใช้งานเข้าใช้ระบบด้วยสิทธิ์ผู้ดูแลระบบสูงสุด **"<role_admin>"**
-* **When** ทำการค้นหาประวัติผู้ป่วย HN **"<patient_hn>"** และคลิกเข้าชมแท็บประวัติการใช้งานระบบ **"<tab_audit_trail>"**
-* **Then** ตารางบันทึก Logs จะต้องแสดงข้อมูลระบุชัดเจนว่า ผู้ใช้รายใดแก้ฟิลด์ **"<edited_field>"** จากค่าเดิมเป็นค่าใหม่ ในวันเวลา **"<edit_timestamp>"**
+### Scenario: MR-003 - Create new patient record successfully (Happy Path)
+* **Given** the user is logged in as "<role>"
+* **When** the user navigates to the Medical Record app
+* **And** starts creating a new patient record
+* **And** fills first name "<first_name>", last name "<last_name>", and auto-generated ID card "<id_card_no>"
+* **Then** the input fields should display the entered information correctly
 
 ---
 
-## 📊 ตารางการระบุพารามิเตอร์จำลองสำหรับ QA (QA Manual / Backlog Parameters Reference)
+## Backlog / Manual Scenarios
 
-| ชื่อพารามิเตอร์ | คำอธิบายความหมาย | ตัวอย่างข้อมูลทดสอบ 1 | ตัวอย่างข้อมูลทดสอบ 2 |
-| :--- | :--- | :--- | :--- |
-| **`<existing_id>`** | เลขประจำตัวประชาชนที่มีอยู่แล้ว | `3101234567890` | `1101501234567` |
-| **`<duplicate_warning_msg>`** | ข้อความแจ้งเตือนกรณีเลข 13 หลักซ้ำ | `เลขประจำตัวประชาชนนี้มีอยู่ในระบบแล้ว` | `Duplicate Citizen ID in system` |
-| **`<new_telephone>`** | หมายเลขโทรศัพท์ผู้ป่วยค่าใหม่ | `099-999-9999` | `081-234-5678` |
-| **`<new_address>`** | ข้อมูลข้อความที่อยู่ใหม่ | `123/45 ถนนราชดำเนิน แขวงพระบรมมหาราชวัง เขตพระนคร กรุงเทพฯ` | `456/78 ถ. สุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพฯ` |
-| **`<emergency_contact_name>`** | ชื่อผู้ติดต่อฉุกเฉิน | `คุณสมชาย ใจดี` | `Mrs. Jane Doe` |
-| **`<emergency_relationship>`** | ความสัมพันธ์ผู้ติดต่อ | `บิดา/มารดา` | `Spouse (คู่สมรส)` |
-| **`<emergency_phone>`** | โทรศัพท์ผู้ติดต่อฉุกเฉิน | `085-555-5555` | `089-888-8888` |
+### Scenario: MR-001 - Verify UI elements on Create Patient page
+* **Given** the user is on the Create New Patient page as "<role>"
+* **Then** required input fields (first name, last name, ID card) should be visible
+* **And** Save and Cancel buttons should be enabled
 
+### Scenario: MR-002 - Validation error when mandatory fields are empty
+* **Given** the user is on the Create New Patient page
+* **When** the user leaves all required fields empty and clicks Save
+* **Then** the system should display validation error messages
+* **And** the data should not be saved
+
+### Scenario: MR-004 - Duplicate ID card number warning
+* **Given** a patient with ID card "<existing_id>" already exists
+* **When** the user creates a new patient with the same ID card "<existing_id>"
+* **Then** the system should display a duplicate warning "<duplicate_warning_msg>"
+* **And** the record should not be created
+
+### Scenario: MR-005 - Read patient data from Smart Card
+* **Given** a Smart Card reader "<card_reader_model>" is connected
+* **When** the user inserts the ID card and clicks the Smart Card button
+* **Then** the fields should auto-fill with name, last name, and ID from the card
+
+### Scenario: MR-010 - Edit patient address and phone number
+* **Given** the user is on the profile page of patient HN "<patient_hn>"
+* **When** the user edits the phone to "<new_telephone>" and address to "<new_address>" and saves
+* **Then** a success message should appear
+* **And** the updated data should persist on reload
+
+### Scenario: MR-011 - Edit emergency contact
+* **Given** the user is editing the record of patient HN "<patient_hn>"
+* **When** the user adds emergency contact "<emergency_contact_name>", relationship "<emergency_relationship>", phone "<emergency_phone>"
+* **And** clicks Save
+* **Then** the emergency contact table should display the new entry
+
+### Scenario: MR-012 - Verify audit trail for edits
+* **Given** the user is logged in as "<role_admin>"
+* **When** the user views the audit trail tab for patient HN "<patient_hn>"
+* **Then** the log should show who edited which field, old/new values, and timestamp

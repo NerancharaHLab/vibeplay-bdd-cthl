@@ -1,0 +1,97 @@
+index,Test Case ID,Scenario ID,Module,Feature,Case Type,Test Case Description,Steps,Preconditions,Test Data,Expected Result,Priority,Severity,Impact,Test Level,Test Type,Version
+1,TC-CTX-5044-001,TS-CTX-5044,IPD,Create IPD Physician Orders (One-day, Continue),Happy,สร้างรายการ Physician Order แบบ One-day สำเร็จจาก IPD Summary,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์สร้าง IPD order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เปิด IPD Summary
+4. กดสร้าง Physician Order
+5. เลือกประเภท One-day
+6. กรอกข้อมูลคำสั่งแพทย์ให้ครบถ้วน
+7. กดบันทึก",ผู้ใช้มีสิทธิ์ ipd-order:create และ admission context โหลดสำเร็จ,"HN: 6904001; AN: valid active AN; Order Type: One-day; ยา/คำสั่ง: Paracetamol 500 mg; Direction: หลังอาหาร",แสดงข้อความบันทึกสำเร็จและรายการ One-day order ใหม่แสดงใน section ที่ถูกต้องใน IPD Summary,High,HIGH,HIGH,System,Functional,1.0.0
+2,TC-CTX-5044-002,TS-CTX-5044,IPD,Create IPD Physician Orders (One-day, Continue),Happy,สร้างรายการ Physician Order แบบ Continue สำเร็จจาก IPD Summary,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์สร้าง IPD order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เปิด IPD Summary
+4. กดสร้าง Physician Order
+5. เลือกประเภท Continue
+6. กรอกข้อมูลคำสั่งแพทย์ให้ครบถ้วน
+7. กดบันทึก",ผู้ใช้มีสิทธิ์ ipd-order:create และ admission context โหลดสำเร็จ,"HN: 6904001; AN: valid active AN; Order Type: Continue; ยา/คำสั่ง: IV Fluid; Direction: continuous",แสดงข้อความบันทึกสำเร็จและรายการ Continue order ใหม่แสดงใน section ORDER FOR CONTINUE อย่างถูกต้อง,High,HIGH,HIGH,System,Functional,1.0.0
+3,TC-CTX-5044-003,TS-CTX-5044,IPD,Create IPD Physician Orders (One-day, Continue),Unhappy,สร้าง Physician Order ไม่สำเร็จเมื่อกรอกข้อมูลจำเป็นไม่ครบ,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์สร้าง IPD order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เปิด IPD Summary
+4. กดสร้าง Physician Order
+5. กรอกข้อมูลไม่ครบ เช่น ไม่ระบุ direction หรือรายการคำสั่ง
+6. กดบันทึก",ผู้ใช้มีสิทธิ์ ipd-order:create และ admission context โหลดสำเร็จ,"Order Type: One-day; Direction: ว่าง",ระบบไม่บันทึกข้อมูลและแสดง validation message ชัดเจนในฟิลด์ที่จำเป็น,High,HIGH,MEDIUM,System,Functional,1.0.0
+4,TC-CTX-5044-004,TS-CTX-5044,IPD,Create IPD Physician Orders (One-day, Continue),Error,ผู้ใช้ไม่มีสิทธิ์ต้องไม่สามารถสร้าง Physician Order ได้,"1. เข้าสู่ระบบด้วยผู้ใช้ที่ไม่มีสิทธิ์ ipd-order:create
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เปิด IPD Summary
+4. ตรวจสอบ action สำหรับสร้าง order",ผู้ใช้ไม่มีสิทธิ์ ipd-order:create,"Role: Nurse without create permission",ปุ่มหรือเมนูสำหรับสร้าง order ไม่แสดงหรือไม่สามารถใช้งานได้ตาม permission gate,High,HIGH,HIGH,System,Functional,1.0.0
+5,TC-CTX-5049-001,TS-CTX-5049,IPD,Sign IPD Orders,Happy,ผู้ใช้ที่มีสิทธิ์สามารถ sign IPD order รายการเดียวได้สำเร็จ,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์ sign
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เปิด IPD Summary หรือ Clinical document ที่เกี่ยวข้อง
+4. เลือก order ที่ยังไม่ถูก sign
+5. กด Sign
+6. ยืนยันการทำรายการถ้ามี",มี order ที่อยู่ในสถานะพร้อม sign และผู้ใช้มีสิทธิ์ ipd-order:sign,"Unsigned Order 1 รายการ",ระบบบันทึกการ sign สำเร็จ สถานะ order เปลี่ยนเป็น signed หรือสถานะที่เกี่ยวข้อง และ UI อัปเดตทันที,High,CRITICAL,HIGHEST,System,Functional,1.0.0
+6,TC-CTX-5049-002,TS-CTX-5049,IPD,Sign IPD Orders,Happy,ผู้ใช้ที่มีสิทธิ์สามารถ sign หลายรายการที่เลือกไว้ได้สำเร็จ,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์ sign
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order หลายรายการที่ยังไม่ถูก sign
+4. กด Sign
+5. ยืนยันการทำรายการถ้ามี",มี order หลายรายการอยู่ในสถานะพร้อม sign,"Unsigned Orders 3 รายการ",ระบบ sign ได้ครบทุกรายการที่เลือกและแต่ละรายการเปลี่ยนสถานะถูกต้องโดยไม่ตกหล่น,High,CRITICAL,HIGHEST,System,Functional,1.0.0
+7,TC-CTX-5049-003,TS-CTX-5049,IPD,Sign IPD Orders,Unhappy,ผู้ใช้ไม่มีสิทธิ์ sign ต้องไม่สามารถ sign order ได้,"1. เข้าสู่ระบบด้วยผู้ใช้ที่ไม่มีสิทธิ์ ipd-order:sign
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เปิดหน้าที่มีรายการ order
+4. ตรวจสอบ action sign",ผู้ใช้ไม่มีสิทธิ์ ipd-order:sign,"Role: Nurse or user without sign permission",ปุ่มหรือ action sign ไม่แสดงหรือถูก disabled และไม่สามารถเรียกทำรายการ sign ได้,High,CRITICAL,HIGHEST,System,Functional,1.0.0
+8,TC-CTX-5049-004,TS-CTX-5049,IPD,Sign IPD Orders,Edge,ไม่สามารถ sign ซ้ำรายการที่ถูก sign ไปแล้ว,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์ sign
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order ที่อยู่ในสถานะ signed แล้ว
+4. พยายามกด sign ซ้ำ",มี order ที่ signed แล้ว,"Signed Order 1 รายการ",ระบบไม่อนุญาตให้ sign ซ้ำและแสดงผลลัพธ์หรือข้อความแจ้งเตือนที่เหมาะสมโดยไม่ทำให้ข้อมูลผิดเพี้ยน,Medium,HIGH,MEDIUM,System,Functional,1.0.0
+9,TC-CTX-5052-001,TS-CTX-5052,IPD,IPD Order Acknowledge by Nurse,Happy,พยาบาลสามารถ acknowledge IPD order ได้สำเร็จ,"1. เข้าสู่ระบบด้วย role พยาบาลที่มีสิทธิ์ใช้งาน
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เปิด IPD Summary หรือหน้ารายการ order
+4. เลือก order ที่รอ acknowledge
+5. กด Acknowledge",มี order ที่อยู่ในสถานะรอให้พยาบาลรับทราบ,"Pending acknowledge order 1 รายการ",ระบบบันทึกการ acknowledge สำเร็จและรายการนั้นเปลี่ยนเป็นสถานะรับทราบแล้ว,High,CRITICAL,HIGH,System,Functional,1.0.0
+10,TC-CTX-5052-002,TS-CTX-5052,IPD,IPD Order Acknowledge by Nurse,Happy,หลัง acknowledge แล้ว status ของ order และ order request ต้องถูกปรับตาม business rule,"1. เข้าสู่ระบบด้วย role พยาบาลที่มีสิทธิ์ใช้งาน
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order ที่รอ acknowledge
+4. กด Acknowledge
+5. รีเฟรชหน้าจอหรือดึงข้อมูลใหม่",มี order และ order request ที่เชื่อมกันอยู่,"Pending acknowledge order พร้อม order request ที่เกี่ยวข้อง",หลัง acknowledge แล้วทั้ง order และ order request ถูกอัปเดตเป็นสถานะที่ถูกต้องและข้อมูลหน้า UI สอดคล้องกับ backend,High,CRITICAL,HIGHEST,System,Functional,1.0.0
+11,TC-CTX-5052-003,TS-CTX-5052,IPD,IPD Order Acknowledge by Nurse,Unhappy,ไม่สามารถ acknowledge ซ้ำรายการที่ถูก acknowledge แล้ว,"1. เข้าสู่ระบบด้วย role พยาบาลที่มีสิทธิ์ใช้งาน
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order ที่ถูก acknowledge แล้ว
+4. พยายามกด Acknowledge ซ้ำ",มี order ที่ acknowledged แล้ว,"Acknowledged order 1 รายการ",ระบบไม่อนุญาตให้ acknowledge ซ้ำและไม่เปลี่ยนข้อมูลผิดจากเดิม,Medium,HIGH,MEDIUM,System,Functional,1.0.0
+12,TC-CTX-5052-004,TS-CTX-5052,IPD,IPD Order Acknowledge by Nurse,Error,ผู้ใช้ที่ไม่ใช่ role ที่เกี่ยวข้องต้องไม่สามารถ acknowledge order ได้,"1. เข้าสู่ระบบด้วยผู้ใช้ที่ไม่มีสิทธิ์ acknowledge
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. ตรวจสอบ action acknowledge",ผู้ใช้ไม่มีสิทธิ์สำหรับ acknowledge order,"Role: Physician without nurse acknowledge permission",ปุ่มหรือ action acknowledge ไม่แสดงหรือไม่สามารถใช้งานได้,High,HIGH,HIGH,System,Functional,1.0.0
+13,TC-CTX-5058-001,TS-CTX-5058,IPD,Cancel IPD Order,Happy,ผู้ใช้สามารถยกเลิก IPD order รายการเดียวได้สำเร็จ,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์จัดการ order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order ที่อนุญาตให้ cancel
+4. กด Cancel
+5. ยืนยันการยกเลิกถ้ามี",มี order ที่อยู่ในสถานะสามารถยกเลิกได้,"Cancelable order 1 รายการ",ระบบยกเลิก order สำเร็จและสถานะ order เปลี่ยนเป็น canceled หรือสถานะที่เทียบเท่าตาม business rule,High,CRITICAL,HIGH,System,Functional,1.0.0
+14,TC-CTX-5058-002,TS-CTX-5058,IPD,Cancel IPD Order,Happy,ผู้ใช้สามารถยกเลิก IPD order หลายรายการด้วยการส่ง ids ได้สำเร็จ,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์จัดการ order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order หลายรายการที่อนุญาตให้ cancel
+4. กด Cancel
+5. ยืนยันการยกเลิกถ้ามี",มี order หลายรายการที่ cancel ได้,"Cancelable orders 2-3 รายการ",ระบบยกเลิกได้ครบทุก id ที่เลือกและสถานะของแต่ละรายการเปลี่ยนถูกต้อง,High,CRITICAL,HIGH,System,Functional,1.0.0
+15,TC-CTX-5058-003,TS-CTX-5058,IPD,Cancel IPD Order,Unhappy,ไม่สามารถยกเลิก order ที่อยู่ในสถานะไม่อนุญาตได้,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์จัดการ order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order ที่อยู่ในสถานะไม่อนุญาตให้ cancel
+4. กด Cancel",มี order ที่ business rule ไม่อนุญาตให้ยกเลิก,"Signed or already canceled order",ระบบไม่ยกเลิกข้อมูลและแสดงข้อความแจ้งเตือนหรือข้อผิดพลาดที่เหมาะสม,High,HIGH,HIGH,System,Functional,1.0.0
+16,TC-CTX-5058-004,TS-CTX-5058,IPD,Cancel IPD Order,Error,ผู้ใช้ไม่มีสิทธิ์ต้องไม่สามารถยกเลิก order ได้,"1. เข้าสู่ระบบด้วยผู้ใช้ที่ไม่มีสิทธิ์ cancel order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. ตรวจสอบ action cancel",ผู้ใช้ไม่มีสิทธิ์ยกเลิก order,"Role without cancel permission",ปุ่มหรือ action cancel ไม่แสดงหรือไม่สามารถใช้งานได้,High,HIGH,HIGH,System,Functional,1.0.0
+17,TC-CTX-5061-001,TS-CTX-5061,IPD,Edit IPD Order,Happy,ผู้ใช้สามารถแก้ไขข้อมูล IPD order item ได้สำเร็จ,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์แก้ไข order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order item ที่อนุญาตให้แก้ไข
+4. กด Edit
+5. ปรับข้อมูลบางฟิลด์ เช่น dose หรือ direction
+6. กดบันทึก",มี order item ที่อนุญาตให้แก้ไขและ admission context โหลดสำเร็จ,"Order Item: Paracetamol 500 mg; New Direction: หลังอาหารเช้า-เย็น",ระบบบันทึกข้อมูลที่แก้ไขสำเร็จและแสดงค่าล่าสุดบนหน้าจออย่างถูกต้อง,High,CRITICAL,HIGH,System,Functional,1.0.0
+18,TC-CTX-5061-002,TS-CTX-5061,IPD,Edit IPD Order,Unhappy,แก้ไข order ไม่สำเร็จเมื่อข้อมูล ParsableDirection ไม่ผ่าน validation,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์แก้ไข order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order item
+4. กด Edit
+5. กรอก direction ในรูปแบบที่ไม่ผ่าน validation
+6. กดบันทึก",มี order item ที่อนุญาตให้แก้ไข,"ParsableDirection: ค่าว่าง หรือรูปแบบไม่ถูกต้อง",ระบบไม่บันทึกข้อมูลและแสดง validation message สำหรับ direction อย่างชัดเจน,High,CRITICAL,HIGH,System,Functional,1.0.0
+19,TC-CTX-5061-003,TS-CTX-5061,IPD,Edit IPD Order,Error,แก้ไข order ไม่สำเร็จเมื่อระบบไม่สามารถ resolve pharmacy routing location ได้,"1. เข้าสู่ระบบด้วยผู้ใช้ที่มีสิทธิ์แก้ไข order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. เลือก order item ที่เกี่ยวข้องกับ medication
+4. กด Edit และบันทึกข้อมูล",environment หรือ master data ของ pharmacy routing location ไม่ครบ,"Medication order ที่ default pharmacy room routing location id ไม่ถูกตั้งค่า",ระบบไม่บันทึกข้อมูลและแสดง error ที่สื่อความหมายได้ว่าข้อมูลอ้างอิง pharmacy ไม่ครบ,High,CRITICAL,HIGHEST,System,Functional,1.0.0
+20,TC-CTX-5061-004,TS-CTX-5061,IPD,Edit IPD Order,Unhappy,ผู้ใช้ไม่มีสิทธิ์ต้องไม่สามารถแก้ไข IPD order ได้,"1. เข้าสู่ระบบด้วยผู้ใช้ที่ไม่มีสิทธิ์แก้ไข order
+2. เปิด patient workspace ด้วย HN และ AN ที่ valid
+3. ตรวจสอบ action edit ของ order item",ผู้ใช้ไม่มีสิทธิ์แก้ไข order,"Role without edit permission",ปุ่มหรือ action edit ไม่แสดงหรือไม่สามารถใช้งานได้ตาม permission gate,High,HIGH,HIGH,System,Functional,1.0.0

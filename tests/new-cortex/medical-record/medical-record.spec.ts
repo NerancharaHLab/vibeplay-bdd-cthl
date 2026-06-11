@@ -1,16 +1,23 @@
 import { test } from '@playwright/test';
 import { MedicalRecordSteps } from '../../../steps/new-cortex/medical-record/medical-record.steps';
+import { MedicalRecordTestCases } from '../../../data/medical-record.data';
+import { groupBy } from '../../../utils/test-helpers';
 
-test.describe('Medical Record Module BDD Tests', () => {
-  test('Create a new patient with random ID', {
-    tag: ['@functional', '@medical-record', '@new-cortex', '@regression']
-  }, async ({ page }) => {
-    const steps = new MedicalRecordSteps(page);
+/**
+ * Medical Record — Dynamic BDD Test Suite
+ */
 
-    await steps.givenUserIsLoggedInAsSuperUser();
-    await steps.whenUserNavigatesToMedicalRecordApp();
-    await steps.andUserStartsCreatingNewPatient();
-    await steps.andFillsPatientInformation();
-    await steps.thenPatientInformationShouldBeCorrect();
-  });
+const featureGroups = groupBy(MedicalRecordTestCases, 'feature');
+
+test.describe('Medical Record (New Cortex)', () => {
+  for (const [feature, cases] of Object.entries(featureGroups)) {
+    test.describe(feature, () => {
+      for (const tc of cases) {
+        test(`${tc.id}: ${tc.name}`, { tag: tc.tags }, async ({ page }) => {
+          const steps = new MedicalRecordSteps(page);
+          await steps.execute(tc);
+        });
+      }
+    });
+  }
 });

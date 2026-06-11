@@ -60,6 +60,8 @@ ${colors.bright}Arguments:${colors.reset}
                  • ${colors.cyan}medical-record-search${colors.reset} (tests/medical-record-search.spec.ts)
                  • ${colors.cyan}advance-visits${colors.reset}        (tests/advance-visits.spec.ts)
                  • ${colors.cyan}check-apps${colors.reset}            (tests/check_apps.spec.ts)
+                 • ${colors.cyan}registration${colors.reset}          (tests/registration.spec.ts)
+
 
 ${colors.bright}Options:${colors.reset}
   ${colors.bright}-t, --testcase <name>${colors.reset}  Grep filter to run specific test case title
@@ -78,11 +80,12 @@ ${colors.bright}Examples:${colors.reset}
 
 const VALID_SITES = ['new-cortex', 'tmh', 'sbh', 'nuh'];
 const FILE_MAP = {
-  'login': 'login/login.spec.ts',
-  'medical-record': 'medical-record/medical-record.spec.ts',
-  'medical-record-search': 'medical-record/medical-record-search.spec.ts',
-  'advance-visits': 'reception/advance-visits.spec.ts',
-  'check-apps': 'reception/check_apps.spec.ts',
+  'login': 'login.spec.ts',
+  'medical-record': 'medical-record.spec.ts',
+  'medical-record-search': 'medical-record-search.spec.ts',
+  'advance-visits': 'advance-visits.spec.ts',
+  'check-apps': 'check_apps.spec.ts',
+  'registration': 'registration.spec.ts',
 };
 
 // Determine if we are using the new command styles (site:module or site:testcase)

@@ -22,7 +22,7 @@ export class LoginSteps {
 
   async thenShouldBeRedirectedToDashboard() {
     await test.step('Then they should be redirected to the applications page and the dashboard should be visible', async () => {
-      await expect(this.page).toHaveURL(/.*cortex\/apps/);
+      await expect(this.page).toHaveURL(/.*(cortex\/apps|apps)/);
       await expect(this.page.locator('.ant-layout-content, .ant-layout-header').first()).toBeVisible();
     });
   }

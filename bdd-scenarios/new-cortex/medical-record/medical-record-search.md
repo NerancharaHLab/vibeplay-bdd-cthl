@@ -1,78 +1,43 @@
-# BDD Scenarios: Medical Record Search / การค้นหาเวชระเบียนผู้ป่วย (New Cortex)
+# BDD Scenarios: Medical Record Search (New Cortex)
 
-พื้นที่สำหรับทีม QA ในการดูตัวอย่าง ออกแบบ และดำเนินการเคสทดสอบการค้นหาเวชระเบียนที่แมปตามไฟล์ `TEST_CASES_MEDICAL_RECORD.md` พร้อมตารางตรวจสอบพารามิเตอร์ของข้อมูลทดสอบ (Parameters & Data Mapping)
-
----
-
-## 1. เคสทดสอบที่ผ่านการเขียนสคริปต์อัตโนมัติแล้ว (Automated Scenarios)
-
-### 🚩 MR-013 (UI): ตรวจสอบความครบถ้วนของฟิลด์ค้นหา
-*คำอธิบาย:* ตรวจสอบการแสดงผลของช่องค้นหาที่จำเป็นทั้งหมดว่าแสดงผลถูกต้องและครบถ้วนตามความต้องการ
-
-* **Given** ผู้ใช้เข้าสู่ระบบและนำทางไปที่โปรแกรมโมดูลเวชระเบียนเรียบร้อยแล้ว (`Given the user is logged in and navigates to the Medical Record app`)
-* **Then** ผู้ใช้จะต้องพบปุ่มและอินพุตค้นหาข้อมูลแสดงขึ้นบนหน้าจอตามระบุ (`Then they should see all core search input fields and query buttons`)
-
-### 🚩 MR-006 / MR-014 (Functional): ค้นหาด้วยเลข HN และตรวจสอบผลลัพธ์
-*คำอธิบาย:* ตรวจสอบว่าระบบรองรับการป้อนข้อมูลค้นหาเลขประวัติผู้ป่วย (HN) และกดปุ่มค้นหาได้ผลลัพธ์ตรง 100%
-
-* **Given** ผู้ใช้ล็อกอินเข้าระบบและนำทางเข้ามาที่หน้ารายการค้นหาเวชระเบียน
-* **When** ผู้ใช้ทำการป้อนเลข HN เป็น **"<search_hn>"** ในช่องป้อนข้อมูลค้นหา (`When they search for a patient using HN "<search_hn>"`)
-* **Then** รายการข้อมูลในตารางผลการค้นหาจะต้องแสดงประวัติผู้ป่วยที่สอดคล้องกับเลข HN นั้นๆ เท่านั้น
-
-### 🚩 MR-015 (Functional): ทดสอบปุ่ม "Clear" เพื่อล้างค่าในทุกฟิลด์การค้นหา
-*คำอธิบาย:* ตรวจสอบการทำงานของฟังก์ชันการคืนค่าฟิลด์การค้นหากลับสู่สถานะเริ่มต้นเมื่อคลิกปุ่ม Clear
-
-* **Given** ผู้ใช้กรอกคำค้นหาเช่น **"<temp_hn>"** ค้างไว้ในฟิลด์ HN เรียบร้อยแล้ว (`When they input a query into the HN search field`)
-* **When** ผู้ใช้ทำการคลิกที่ปุ่ม "ล้างค่าค้นหา" (`And click the Clear search button`)
-* **Then** ข้อความในฟิลด์กรอกเลข HN ค้นหา จะต้องถูกลบออกและกลายเป็นค่าว่างทันที (`Then the HN input field should be completely empty`)
+## Feature: Medical Record Search
+As a Medical Record staff
+I want to search for patient records
+So that I can quickly find and access patient information
 
 ---
 
-## 📊 ตารางตรวจสอบพารามิเตอร์สำหรับเคสอัตโนมัติ (Automated Parameters Reference)
+## Automated Scenarios
 
-| ตัวแปรพารามิเตอร์ | ประเภทข้อมูล | แหล่งที่มาของข้อมูล | ค่าที่ใช้ในการทดสอบ | คำอธิบายและฟังก์ชันการใช้งานในโค้ด |
-| :--- | :--- | :--- | :--- | :--- |
-| **`<search_hn>`** | String (เลขประจำตัวผู้ป่วย HN) | Hardcoded ใน Spec | `1234567` | ใช้รันการค้นหาเวชระเบียนผ่านฟังก์ชัน `whenUserSearchesByHN(testHN)` |
-| **`<temp_hn>`** | String (เลข HN สำหรับเคลียร์ค่า) | Hardcoded ใน Spec | `9999999` | ใช้ทดสอบพิมพ์ค้างเพื่อเคลียร์ฟิลด์ผ่านฟังก์ชัน `whenUserFillsSearchHN(hn)` |
+### Scenario: MR-013 - Verify search fields are displayed
+* **Given** the user is logged in and navigates to the Medical Record app
+* **Then** all core search input fields and query buttons should be visible
 
----
+### Scenario: MR-006/MR-014 - Search by HN and verify results
+* **Given** the user is on the Medical Record search page
+* **When** the user searches for HN "<search_hn>"
+* **Then** the results table should display only records matching that HN
 
-## 2. ตัวอย่าง BDD สำหรับเคสทดสอบอื่นในแผนงาน (QA Backlog & Manual Scenarios)
-
-> [!NOTE]
-> ตัวอย่างด้านล่างแสดงวิธีกำหนดพารามิเตอร์ให้กับเคสค้นหาอื่นๆ เพื่อความยืดหยุ่นในการจัดทำเงื่อนไขทดสอบของทีม QA ทั้งแบบ Manual และแบบเขียนสคริปต์อัตโนมัติเพิ่มเติม
-
-### 🚩 MR-007 (Functional): ค้นหาด้วยชื่อ-นามสกุล (รองรับ Partial Search)
-*คำอธิบาย:* ตรวจสอบว่าระบบรองรับการค้นหาผู้ป่วยโดยการพิมพ์ชื่อเพียงบางส่วนได้ถูกต้อง เช่น พิมพ์ "สมศักดิ์" แล้วแสดงผลผู้ป่วยชื่อ สมศักดิ์ ทั้งหมด
-
-* **Given** ผู้ใช้เข้าสู่หน้าจอระบบการค้นหาเวชระเบียน
-* **When** ผู้ใช้พิมพ์คำค้นหาเป็น **"<search_name>"** ในช่องค้นหา ชื่อ-นามสกุล
-* **And** คลิกปุ่ม "ค้นหา"
-* **Then** ตารางผลลัพธ์จะต้องแสดงรายชื่อผู้ป่วยทุกคนที่มีชื่อหรือนามสกุลขึ้นต้นหรือประกอบด้วยคำว่า **"<search_name>"**
-
-### 🚩 MR-008 (Functional): ค้นหาด้วยเลขบัตรประชาชน (ID Card / Passport)
-*คำอธิบาย:* ตรวจสอบการค้นหาประวัติผู้ป่วยโดยอิงตามเลขบัตรประชาชน 13 หลัก หรือเลขที่พาสปอร์ต
-
-* **Given** ผู้ใช้เข้าสู่หน้าจอระบบการค้นหาเวชระเบียน
-* **When** ทำการป้อนเลขบัตรประชาชน **"<search_citizen_id>"** ในช่องป้อนข้อมูลค้นหาด้วยบัตรประชาชน
-* **And** คลิกปุ่ม "ค้นหา"
-* **Then** ระบบจะต้องค้นหาและแสดงผลรายการผู้ป่วยที่มีเลขประจำตัวตรงกับ **"<search_citizen_id>"**
-
-### 🚩 MR-009 (UI): ตรวจสอบการแสดงผลตารางผลลัพธ์ (Pagination, Sorting)
-*คำอธิบาย:* ตรวจสอบความถูกต้องและประสิทธิภาพของตารางแสดงข้อมูลเมื่อมีรายการผู้ป่วยมากกว่าจำนวนการแสดงผลต่อหน้า
-
-* **Given** ผู้ใช้กรอกคำค้นหาและระบบแสดงผลรายการผู้ป่วยรวมทั้งหมดจำนวน **"<total_records>"** รายการ
-* **When** ผู้ใช้ทำการคลิกปุ่มเปลี่ยนหน้าไปยังหน้า **"<target_page>"** บนแถบเลื่อนหน้า (Pagination)
-* **Then** ระบบตารางผลลัพธ์จะต้องแสดงรายการของข้อมูลชุดที่สอดคล้องอย่างถูกต้องแม่นยำ
+### Scenario: MR-015 - Clear search fields
+* **Given** the user has entered "<temp_hn>" in the HN search field
+* **When** the user clicks the Clear button
+* **Then** the HN input field should be empty
 
 ---
 
-## 📊 ตารางการระบุพารามิเตอร์จำลองสำหรับ QA (QA Manual / Backlog Parameters Reference)
+## Backlog / Manual Scenarios
 
-| ชื่อพารามิเตอร์ | คำอธิบายความหมาย | ตัวอย่างข้อมูลทดสอบ 1 | ตัวอย่างข้อมูลทดสอบ 2 |
-| :--- | :--- | :--- | :--- |
-| **`<search_name>`** | คำค้นหาชื่อหรือนามสกุล (บางส่วน) | `สม` (ค้นหา: สมชาย, สมบูรณ์) | `Jane` (ค้นหา: Jane, Janet) |
-| **`<search_citizen_id>`** | เลขบัตรประชาชนที่ต้องการค้นหา | `1234567890123` | `3101509999999` |
-| **`<total_records>`** | จำนวนรายการผลลัพธ์ทั้งหมด | `45` | `12` |
-| **`<target_page>`** | หน้าตารางเป้าหมายที่ต้องการสลับ | `2` | `3` |
+### Scenario: MR-007 - Search by partial name
+* **Given** the user is on the Medical Record search page
+* **When** the user types "<search_name>" in the name search field and clicks Search
+* **Then** the results should show patients whose name contains "<search_name>"
 
+### Scenario: MR-008 - Search by Citizen ID / Passport
+* **Given** the user is on the Medical Record search page
+* **When** the user enters "<search_citizen_id>" in the ID card field and clicks Search
+* **Then** the results should show the matching patient record
+
+### Scenario: MR-009 - Verify pagination and sorting
+* **Given** search results contain "<total_records>" records
+* **When** the user navigates to page "<target_page>"
+* **Then** the table should display the correct subset of records

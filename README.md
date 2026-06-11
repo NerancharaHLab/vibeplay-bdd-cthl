@@ -1,5 +1,9 @@
 # VibePlay BDD CTHL (Automated Tests for Cortex - HLab)
 
+> [!IMPORTANT]
+> **สำหรับ AI Agents และนักพัฒนา (For AI & Developers):**
+> ก่อนเริ่มงานทุกครั้ง คุณต้องอ่านและทำตามแนวทางการทำงานที่กำหนดไว้ใน [มาตรฐาน Git Workflow (km/git_workflow.md)](file:///Users/neranchara/Jobs/Project/VibeCode_Automate_Test_ Playwright_BDD/km/git_workflow.md) เสมอ เพื่อรักษามาตรฐาน Dynamic Objective ของสเปกและคอมมิต
+
 โปรเจกต์ทดสอบอัตโนมัติด้วย Playwright นี้ได้รับการปรับโครงสร้างภายใต้ชื่อ **vibeplay-bdd-cthl** เพื่อทดสอบระบบของโปรดักต์ **Cortex** ของทางบริษัท **HLab** โดยรองรับแนวคิด **BDD (Behavior-Driven Development)** แบบดั้งเดิม (Given-When-Then) และ**แยกทรัพยากรการทดสอบทั้งหมดตามรายไซต์ (Site-Separation)** สำหรับทั้ง 4 ไซต์: **New Cortex**, **TMH**, **SBH**, และ **NUH** อย่างสมบูรณ์แบบ
 
 ## โครงสร้างโปรเจกต์ (Project Structure)

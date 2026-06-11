@@ -19,7 +19,7 @@ export class CheckAppsSteps {
 
   async whenUserNavigatesToAppsPage() {
     await test.step('When the user navigates to the apps page', async () => {
-      await expect(this.page).toHaveURL(/.*cortex\/apps/, { timeout: 60000 });
+      await expect(this.page).toHaveURL(/.*(cortex\/apps|apps)/, { timeout: 60000 });
     });
   }
 

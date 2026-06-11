@@ -71,7 +71,7 @@ export class CreateMedicationPage extends BasePage {
       await firstOption.click();
       await this.page.waitForTimeout(500);
     } catch (e) {
-      console.log('Filling Medication Category dropdown skipped/failed:', e.message);
+      console.log('Filling Medication Category dropdown skipped/failed:', (e as any).message);
     }
 
     // Fill NLEM (Required Select when Formulary Source is NLEM)
@@ -86,7 +86,7 @@ export class CreateMedicationPage extends BasePage {
         await this.page.waitForTimeout(500);
       }
     } catch (e) {
-      console.log('Filling NLEM dropdown skipped/failed:', e.message);
+      console.log('Filling NLEM dropdown skipped/failed:', (e as any).message);
     }
   }
 
@@ -253,7 +253,7 @@ export class CreateMedicationPage extends BasePage {
         await this.page.waitForTimeout(1000);
       }
     } catch (e) {
-      console.log('No confirmation modal appeared, proceeding...', e.message);
+      console.log('No confirmation modal appeared, proceeding...', (e as any).message);
     }
   }
 

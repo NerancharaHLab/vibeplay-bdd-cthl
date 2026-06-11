@@ -1,5 +1,11 @@
 import { Page, Locator } from '@playwright/test';
+<<<<<<< Updated upstream:pages/sbh/login/login.page.ts
 import { LoginLocators } from '../../../locators/sbh/login/login.locators';
+=======
+import { LoginLocators } from '../locators/login.locators';
+import { getRoute } from '../utils/test-helpers';
+
+>>>>>>> Stashed changes:pages/login.page.ts
 
 export class LoginPage {
   readonly page: Page;
@@ -17,7 +23,7 @@ export class LoginPage {
   }
 
   async goto() {
-    await this.page.goto('/cortex/welcome', { timeout: 60000 });
+    await this.page.goto(getRoute('/cortex/welcome'), { timeout: 60000 });
   }
 
   async login(username: string, password: string) {
@@ -57,7 +63,7 @@ export class LoginPage {
     
     // 5. Wait for either the app to load or URL with code parameter (Keycloak callback)
     try {
-      await this.page.waitForURL(/.*cortex\/apps|.*code=/, { timeout: 45000 });
+      await this.page.waitForURL(/.*(cortex\/apps|apps)|.*code=/, { timeout: 45000 });
     } catch (e) {
       console.log('URL wait failed, checking for layout element...');
     }

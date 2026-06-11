@@ -1,36 +1,23 @@
-import { test } from '../../../utils/fixtures';
-import { AdvanceVisitsTestData } from '../../../data/advance-visits.data';
+import { test } from '@playwright/test';
+import { AdvanceVisitsSteps } from '../../../steps/new-cortex/reception/advance-visits.steps';
+import { AdvanceVisitsTestCases } from '../../../data/advance-visits.data';
+import { groupBy } from '../../../utils/test-helpers';
 
-test.describe('Advance Visits (เปิด Visit ผู้ป่วยนัด) BDD Tests', () => {
-  
-  test.beforeEach(async ({ advanceVisitsSteps }) => {
-    await advanceVisitsSteps.givenUserIsLoggedInToCortex();
-  });
+/**
+ * Advance Visits (เปิด Visit ผู้ป่วยนัด) — Dynamic BDD Test Suite
+ */
 
-  test('Verify UI elements on Advance Visits page', {
-    tag: ['@ui', '@advance-visits', '@new-cortex', '@regression']
-  }, async ({ advanceVisitsSteps }) => {
-    await advanceVisitsSteps.whenUserNavigatesToAdvanceVisits();
-    await advanceVisitsSteps.thenShouldSeeActionButtons();
-  });
+const featureGroups = groupBy(AdvanceVisitsTestCases, 'feature');
 
-  test('Check Filter inputs visibility', {
-    tag: ['@ui', '@advance-visits', '@new-cortex', '@regression']
-  }, async ({ advanceVisitsSteps }) => {
-    await advanceVisitsSteps.whenUserNavigatesToAdvanceVisits();
-    await advanceVisitsSteps.thenShouldSeeFilterOptions();
-  });
-
-  // Data-Driven Testing Loop
-  for (const data of AdvanceVisitsTestData) {
-    test(`Data-Driven Filter: ${data.testName}`, {
-      tag: ['@functional', '@advance-visits', '@new-cortex', '@regression']
-    }, async ({ advanceVisitsSteps }) => {
-      await advanceVisitsSteps.whenUserNavigatesToAdvanceVisits();
-      await advanceVisitsSteps.whenUserFillsFilters(data.targetDate, data.clinicName, data.doctorName);
-      
-      // Example verification if we had an expected patient name in data:
-      // await advanceVisitsSteps.thenShouldSeePatientInList(data.expectedPatientName);
+test.describe('Advance Visits (New Cortex)', () => {
+  for (const [feature, cases] of Object.entries(featureGroups)) {
+    test.describe(feature, () => {
+      for (const tc of cases) {
+        test(`${tc.id}: ${tc.name}`, { tag: tc.tags }, async ({ page }) => {
+          const steps = new AdvanceVisitsSteps(page);
+          await steps.execute(tc);
+        });
+      }
     });
   }
 });

@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { getRoute } from '../utils/test-helpers';
 
 export class BasePage {
   readonly page: Page;
@@ -8,7 +9,7 @@ export class BasePage {
   }
 
   async goto(url: string) {
-    await this.page.goto(url);
+    await this.page.goto(getRoute(url));
   }
 
   async clickElement(locator: Locator) {
