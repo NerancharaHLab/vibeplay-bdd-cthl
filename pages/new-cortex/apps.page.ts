@@ -7,7 +7,7 @@ export class AppsPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.medicalRecordCard = page.locator(AppsLocators.medicalRecordCard);
+    this.medicalRecordCard = page.getByText('เวชระเบียน').first();
   }
 
   async openMedicalRecord() {
