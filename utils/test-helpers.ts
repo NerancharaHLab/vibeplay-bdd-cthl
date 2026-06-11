@@ -3,8 +3,11 @@
  * that follows the checksum rule.
  */
 export function generateThaiID(): string {
-  let id = '';
-  for (let i = 0; i < 12; i++) {
+  // First digit: 1-8 (must not be 0 or 9 for valid Thai ID cards)
+  let id = Math.floor(Math.random() * 8 + 1).toString();
+  
+  // Remaining 11 digits: 0-9
+  for (let i = 1; i < 12; i++) {
     id += Math.floor(Math.random() * 10).toString();
   }
 

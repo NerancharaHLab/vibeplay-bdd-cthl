@@ -78,11 +78,11 @@ ${colors.bright}Examples:${colors.reset}
 
 const VALID_SITES = ['new-cortex', 'tmh', 'sbh', 'nuh'];
 const FILE_MAP = {
-  'login': 'login.spec.ts',
-  'medical-record': 'medical-record.spec.ts',
-  'medical-record-search': 'medical-record-search.spec.ts',
-  'advance-visits': 'advance-visits.spec.ts',
-  'check-apps': 'check_apps.spec.ts',
+  'login': 'login/login.spec.ts',
+  'medical-record': 'medical-record/medical-record.spec.ts',
+  'medical-record-search': 'medical-record/medical-record-search.spec.ts',
+  'advance-visits': 'reception/advance-visits.spec.ts',
+  'check-apps': 'reception/check_apps.spec.ts',
 };
 
 // Determine if we are using the new command styles (site:module or site:testcase)
