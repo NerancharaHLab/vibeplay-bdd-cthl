@@ -40,5 +40,19 @@
     "doctorName": "พญ.สมศรี รักดี",
     "expect": "results-filtered",
     "tags": ["@functional", "@advance-visits", "@new-cortex", "@regression", "@filter"]
+  },
+  {
+    "id": "AV-004-001",
+    "name": "Create patient appointment successfully",
+    "feature": "Advance Visits Appointment",
+    "role": "super",
+    "action": "create-appointment",
+    "targetDate": "12/06/2569",
+    "clinicName": "ห้องตรวจโรคอายุรกรรมทั่วไป MED",
+    "doctorName": "วิชัย เอื้อเฟื้อ",
+    "timeSlot": "09:00 - 09:10",
+    "patientHn": "1000001",
+    "expect": "appointment-created",
+    "tags": ["@functional", "@advance-visits", "@new-cortex", "@regression", "@create-appointment"]
   }
 ]

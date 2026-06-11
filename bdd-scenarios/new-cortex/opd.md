@@ -19,6 +19,16 @@ So that appointment queues are prepared before patients arrive
 * **Given** the user is on the Advance Visits page
 * **Then** filter options for Date, Clinic, and Doctor should be visible
 
+### Scenario: AV-004-001 - Create patient appointment successfully
+* **Given** the user is on the Advance Visits page
+* **When** they click "+ เพิ่มนัดหมาย"
+* **And** fill the appointment form with Clinic="ห้องตรวจโรคอายุรกรรมทั่วไป MED", Doctor="วิชัย เอื้อเฟื้อ", Date="12/06/2569"
+* **And** click "ค้นหาเวลานัดหมาย" to search for free slots
+* **And** select the time slot: "09:00 - 09:10"
+* **And** search and link patient HN: "1000001"
+* **And** click "บันทึก" to save the appointment
+* **Then** the appointment should be created successfully and modal closed
+
 ---
 
 ## Backlog / Manual Scenarios
