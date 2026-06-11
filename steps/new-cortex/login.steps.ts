@@ -60,7 +60,8 @@ export class LoginSteps {
   }
 
   async thenShouldShowInvalidCredentialsError() {
-    await test.step('Then they should see an invalid credentials error message on the login screen', async () => {
+    await test.step('Then they should see the red invalid credentials error message "Invalid username or password." on the login screen', async () => {
+      // Keycloak displays error notifications within a red alert box (often having class alert-error or id input-error)
       const errorAlert = this.page.locator([
         '.alert-error',
         '#input-error',
@@ -68,7 +69,9 @@ export class LoginSteps {
         'text="Invalid username or password."',
         'text="ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"'
       ].join(', ')).first();
+      
       await expect(errorAlert).toBeVisible({ timeout: 15000 });
+      await expect(errorAlert).toContainText(/Invalid username or password\.|ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง/i);
     });
   }
 }
