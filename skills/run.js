@@ -55,11 +55,13 @@ ${colors.bright}Alternative (Direct Node):${colors.reset}
 ${colors.bright}Arguments:${colors.reset}
   ${colors.bright}<site>${colors.reset}         Target environment: ${colors.green}new-cortex${colors.reset}, ${colors.green}tmh${colors.reset}, ${colors.green}sbh${colors.reset}, ${colors.green}nuh${colors.reset}
   ${colors.bright}<module>${colors.reset}       Test module name:
-                 • ${colors.cyan}login${colors.reset}                 (tests/login.spec.ts)
+                  • ${colors.cyan}login${colors.reset}                 (tests/login.spec.ts)
                  • ${colors.cyan}medical-record${colors.reset}        (tests/medical-record.spec.ts)
-                 • ${colors.cyan}medical-record-search${colors.reset} (tests/medical-record-search.spec.ts)
-                 • ${colors.cyan}advance-visits${colors.reset}        (tests/advance-visits.spec.ts)
-                 • ${colors.cyan}check-apps${colors.reset}            (tests/check_apps.spec.ts)
+                 • ${colors.cyan}opd${colors.reset}                   (tests/opd.spec.ts)
+                 • ${colors.cyan}ipd${colors.reset}                   (tests/ipd.spec.ts)
+                 • ${colors.cyan}pharmacy${colors.reset}              (tests/pharmacy.spec.ts)
+                 • ${colors.cyan}claim${colors.reset}                 (tests/claim.spec.ts)
+
 
 ${colors.bright}Options:${colors.reset}
   ${colors.bright}-t, --testcase <name>${colors.reset}  Grep filter to run specific test case title
@@ -78,11 +80,18 @@ ${colors.bright}Examples:${colors.reset}
 
 const VALID_SITES = ['new-cortex', 'tmh', 'sbh', 'nuh'];
 const FILE_MAP = {
-  'login': 'login/login.spec.ts',
-  'medical-record': 'medical-record/medical-record.spec.ts',
-  'medical-record-search': 'medical-record/medical-record-search.spec.ts',
-  'advance-visits': 'reception/advance-visits.spec.ts',
-  'check-apps': 'reception/check_apps.spec.ts',
+  'login': 'login.spec.ts',
+  'medical-record': 'medical-record.spec.ts',
+  'medical-record-search': 'medical-record.spec.ts',
+  'registration': 'medical-record.spec.ts',
+  'advance-visits': 'opd.spec.ts',
+  'check-apps': 'opd.spec.ts',
+  'opd': 'opd.spec.ts',
+  'ipd': 'ipd.spec.ts',
+  'ipd-orders': 'ipd.spec.ts',
+  'medication': 'pharmacy.spec.ts',
+  'pharmacy': 'pharmacy.spec.ts',
+  'claim': 'claim.spec.ts',
 };
 
 // Determine if we are using the new command styles (site:module or site:testcase)

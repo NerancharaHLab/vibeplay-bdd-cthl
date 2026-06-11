@@ -1,5 +1,9 @@
 [
   {
-    "username": "user1", "password": "MyPassw0rd", "permission": "Super User", "role": "super"
+    "username": "user1",
+    "password": "MyPassw0rd",
+    "permission": "Super User",
+    "role": "super",
+    "displayName": "user1 example"
   }
 ]

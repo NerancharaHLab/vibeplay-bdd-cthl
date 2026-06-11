@@ -1,0 +1,9 @@
+Logged in. Waiting for dashboard...
+Clicking ห้องยา
+Clicking Medication master
+Could not click Medication master
+Looking for create button
+Could not find create button.
+Looking for tabs to click...
+Found 0 tabs
+Dumping DOM...

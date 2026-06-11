@@ -6,6 +6,7 @@ type TestUser = {
   password: string;
   role: string;
   permission?: string;
+  displayName?: string;
 };
 
 const DEFAULT_SITE = 'new-cortex';

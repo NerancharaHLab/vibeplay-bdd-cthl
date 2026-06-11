@@ -1,0 +1,3 @@
+Clicking ห้องยา
+Clicking Medication master
+Failed to click Medication master text

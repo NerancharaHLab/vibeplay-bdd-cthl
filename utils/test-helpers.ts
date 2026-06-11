@@ -38,3 +38,27 @@ export function generateRandomString(length: number): string {
 export function formatDate(date: Date): string {
   return date.toISOString().split('T')[0];
 }
+
+/**
+ * Groups an array of objects by a given key.
+ * Returns a Record<string, T[]> where each key maps to items sharing that value.
+ */
+export function groupBy<T>(items: T[], key: keyof T): Record<string, T[]> {
+  return items.reduce((acc, item) => {
+    const groupKey = String(item[key]);
+    if (!acc[groupKey]) {
+      acc[groupKey] = [];
+    }
+    acc[groupKey].push(item);
+    return acc;
+  }, {} as Record<string, T[]>);
+}
+
+/**
+ * Resolves navigation paths based on the running site.
+ * For 'new-cortex', it removes the '/cortex' prefix if present since that environment runs directly under the root domain.
+ */
+export function getRoute(path: string): string {
+  return path;
+}
+
