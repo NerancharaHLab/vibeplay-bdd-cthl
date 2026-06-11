@@ -3,11 +3,6 @@
  */
 
 export type MedicalRecordAction =
-  | 'verify-ui-elements'
-  | 'create-validation'
-  | 'create-happy'
-  | 'create-duplicate'
-  | 'smartcard-check'
   | 'search-hn'
   | 'search-fields-ui'
   | 'clear-search'
@@ -16,11 +11,6 @@ export type MedicalRecordAction =
   | 'verify-audit-trail';
 
 export type MedicalRecordExpect =
-  | 'ui-visible'
-  | 'validation-error'
-  | 'success'
-  | 'duplicate-warning'
-  | 'smartcard-autofill'
   | 'results-visible'
   | 'search-fields-visible'
   | 'fields-cleared'
@@ -56,56 +46,6 @@ export type MedicalRecordTestCase = {
 const BASE_TAGS = ['@functional', '@medical-record', '@new-cortex', '@regression'];
 
 export const MedicalRecordTestCases: MedicalRecordTestCase[] = [
-  {
-    id: 'MR-001',
-    name: 'Verify UI elements on Create Patient page',
-    feature: 'Create Patient',
-    role: 'super',
-    action: 'verify-ui-elements',
-    expect: 'ui-visible',
-    tags: [...BASE_TAGS, '@ui'],
-  },
-  {
-    id: 'MR-002',
-    name: 'Validation error when mandatory fields are empty',
-    feature: 'Create Patient',
-    role: 'super',
-    action: 'create-validation',
-    expect: 'validation-error',
-    tags: [...BASE_TAGS, '@ui', '@validation'],
-  },
-  {
-    id: 'MR-003',
-    name: 'Create patient successfully (Happy Path)',
-    feature: 'Create Patient',
-    role: 'super',
-    action: 'create-happy',
-    firstName: 'TestName',
-    lastName: 'TestLastName',
-    expect: 'success',
-    tags: [...BASE_TAGS, '@smoke'],
-  },
-  {
-    id: 'MR-004',
-    name: 'Duplicate ID card number warning',
-    feature: 'Create Patient',
-    role: 'super',
-    action: 'create-duplicate',
-    existingId: '3101234567890',
-    duplicateWarningMsg: 'เลขประจำตัวประชาชนนี้มีอยู่ในระบบแล้ว',
-    expect: 'duplicate-warning',
-    tags: [...BASE_TAGS, '@negative'],
-  },
-  {
-    id: 'MR-005',
-    name: 'Read patient data from Smart Card',
-    feature: 'Create Patient',
-    role: 'super',
-    action: 'smartcard-check',
-    cardReaderModel: 'ACS ACR39U',
-    expect: 'smartcard-autofill',
-    tags: [...BASE_TAGS, '@ui'],
-  },
   {
     id: 'MR-006',
     name: 'Perform search by HN',

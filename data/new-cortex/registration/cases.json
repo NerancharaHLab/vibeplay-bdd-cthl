@@ -1,0 +1,66 @@
+[
+  {
+    "id": "REG-001",
+    "name": "Verify UI elements on Create Patient page",
+    "feature": "Create Patient",
+    "role": "super",
+    "action": "verify-ui-elements",
+    "expect": "ui-visible",
+    "tags": ["@functional", "@registration", "@new-cortex", "@regression", "@ui"]
+  },
+  {
+    "id": "REG-002",
+    "name": "Validation error when mandatory fields are empty",
+    "feature": "Create Patient",
+    "role": "super",
+    "action": "create-validation",
+    "expect": "validation-error",
+    "tags": ["@functional", "@registration", "@new-cortex", "@regression", "@ui", "@validation"]
+  },
+  {
+    "id": "REG-003",
+    "name": "Create patient successfully (Happy Path)",
+    "feature": "Create Patient",
+    "role": "super",
+    "action": "create-happy",
+    "firstName": "TestName",
+    "lastName": "TestLastName",
+    "expect": "success",
+    "tags": ["@functional", "@registration", "@new-cortex", "@regression", "@smoke"]
+  },
+  {
+    "id": "REG-004",
+    "name": "Duplicate ID card number warning",
+    "feature": "Create Patient",
+    "role": "super",
+    "action": "create-duplicate",
+    "existingId": "3101234567890",
+    "duplicateWarningMsg": "เลขประจำตัวประชาชนนี้มีอยู่ในระบบแล้ว",
+    "expect": "duplicate-warning",
+    "tags": ["@functional", "@registration", "@new-cortex", "@regression", "@negative"]
+  },
+  {
+    "id": "REG-005",
+    "name": "Read patient data from Smart Card",
+    "feature": "Create Patient",
+    "role": "super",
+    "action": "smartcard-check",
+    "cardReaderModel": "ACS ACR39U",
+    "expect": "smartcard-autofill",
+    "tags": ["@functional", "@registration", "@new-cortex", "@regression", "@ui"]
+  },
+  {
+    "id": "REG-006",
+    "name": "Create patient appointment successfully",
+    "feature": "Create Visit",
+    "role": "super",
+    "action": "create-appointment",
+    "targetDate": "12/06/2569",
+    "clinicName": "ห้องตรวจโรคอายุรกรรมทั่วไป MED",
+    "doctorName": "วิชัย เอื้อเฟื้อ",
+    "timeSlot": "09:00 - 09:10",
+    "patientHn": "1000001",
+    "expect": "appointment-created",
+    "tags": ["@functional", "@registration", "@new-cortex", "@regression", "@create-appointment"]
+  }
+]

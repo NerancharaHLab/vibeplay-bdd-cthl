@@ -17,6 +17,7 @@
     "site:testcase": "node skills/run.js site:testcase",
     "test:new-cortex:login": "node skills/run.js new-cortex login",
     "test:new-cortex:medical-record": "node skills/run.js new-cortex medical-record",
+    "test:new-cortex:registration": "node skills/run.js new-cortex registration",
     "test:new-cortex:opd": "node skills/run.js new-cortex opd",
     "test:new-cortex:ipd": "node skills/run.js new-cortex ipd",
     "test:new-cortex:pharmacy": "node skills/run.js new-cortex pharmacy",

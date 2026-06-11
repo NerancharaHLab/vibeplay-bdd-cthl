@@ -83,7 +83,7 @@ const FILE_MAP = {
   'login': 'login.spec.ts',
   'medical-record': 'medical-record.spec.ts',
   'medical-record-search': 'medical-record.spec.ts',
-  'registration': 'medical-record.spec.ts',
+  'registration': 'registration.spec.ts',
   'advance-visits': 'opd.spec.ts',
   'check-apps': 'opd.spec.ts',
   'opd': 'opd.spec.ts',

@@ -5,14 +5,12 @@
 export type OpdAction =
   | 'verify-ui'
   | 'verify-filters-ui'
-  | 'filter-visits'
-  | 'create-appointment';
+  | 'filter-visits';
 
 export type OpdExpect =
   | 'ui-elements-visible'
   | 'filter-fields-visible'
-  | 'results-filtered'
-  | 'appointment-created';
+  | 'results-filtered';
 
 export type OpdTestCase = {
   id: string;
@@ -23,8 +21,6 @@ export type OpdTestCase = {
   targetDate?: string;
   clinicName?: string;
   doctorName?: string;
-  timeSlot?: string;
-  patientHn?: string;
   expect: OpdExpect;
   tags: string[];
 };

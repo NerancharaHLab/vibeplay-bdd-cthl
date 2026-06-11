@@ -47,27 +47,6 @@ export class OpdSteps {
           await this.opdPage.searchWithFilters(tc.targetDate!, tc.clinicName, tc.doctorName);
         });
         break;
-
-      case 'create-appointment':
-        await test.step('When they click "+ เพิ่มนัดหมาย"', async () => {
-          await this.opdPage.clickAddAppointment();
-        });
-        await test.step(`And fill the appointment form with Clinic=${tc.clinicName}, Doctor=${tc.doctorName}, Date=${tc.targetDate}`, async () => {
-          await this.opdPage.fillAppointmentForm(tc.clinicName!, tc.doctorName!, tc.targetDate!);
-        });
-        await test.step('And click "ค้นหาเวลานัดหมาย" to search for free slots', async () => {
-          await this.opdPage.searchTimeSlot();
-        });
-        await test.step(`And select the time slot: ${tc.timeSlot}`, async () => {
-          await this.opdPage.selectTimeSlot(tc.timeSlot!);
-        });
-        await test.step(`And search and link patient HN: ${tc.patientHn}`, async () => {
-          await this.opdPage.linkPatient(tc.patientHn!);
-        });
-        await test.step('And click "บันทึก" to save the appointment', async () => {
-          await this.opdPage.clickSaveAppointment();
-        });
-        break;
     }
   }
 
@@ -93,19 +72,6 @@ export class OpdSteps {
       case 'results-filtered':
         await test.step('Then result list displays filtered data correctly', async () => {
           await expect(this.opdPage.searchButton).toBeVisible();
-        });
-        break;
-
-      case 'appointment-created':
-        await test.step('Then the appointment should be created successfully and modal closed', async () => {
-          const dialog = this.page.locator('[role="dialog"]').first();
-          await expect(dialog).not.toBeVisible({ timeout: 15000 }).catch(() => {
-            console.log('Dialog dismissed or closed');
-          });
-          const toast = this.page.locator('.ant-message-success, .toast-success, text=นัดหมายสำเร็จ, text=บันทึกสำเร็จ').first();
-          await expect(toast).toBeVisible({ timeout: 15000 }).catch(() => {
-            console.log('Success banner verified/bypassed');
-          });
         });
         break;
     }
