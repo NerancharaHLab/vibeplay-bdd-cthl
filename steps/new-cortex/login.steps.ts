@@ -12,19 +12,25 @@ export class LoginSteps {
 
   // ─── Dynamic Entry Point ───────────────────────────
   async execute(tc: LoginTestCase) {
-    const user = getUserByRole(undefined, tc.role, 'new-cortex');
-
     // ── Given ──
     await this.givenUserIsOnLoginPage();
 
     // ── When ──
-    await test.step(`When user logs in as "${tc.role}"`, async () => {
-      await this.loginPage.login(user.username, user.password);
+    await test.step(`When user logs in (action: ${tc.action})`, async () => {
+      if (tc.username && tc.password) {
+        await this.loginPage.login(tc.username, tc.password);
+      } else {
+        const user = getUserByRole(undefined, tc.role, 'new-cortex');
+        await this.loginPage.login(user.username, user.password);
+      }
     });
 
     // ── Then ──
     if (tc.expect === 'success-and-redirected') {
+      const user = getUserByRole(undefined, tc.role, 'new-cortex');
       await this.thenShouldBeRedirectedToDashboard(user.displayName || user.username);
+    } else if (tc.expect === 'error-invalid-credentials') {
+      await this.thenShouldShowInvalidCredentialsError();
     }
   }
 
@@ -50,6 +56,19 @@ export class LoginSteps {
         await expect(this.loginPage.profileDropdown.first()).toBeVisible({ timeout: 10000 });
         await expect(this.loginPage.profileDropdown.first()).toContainText(usernameOrDisplayName);
       }
+    });
+  }
+
+  async thenShouldShowInvalidCredentialsError() {
+    await test.step('Then they should see an invalid credentials error message on the login screen', async () => {
+      const errorAlert = this.page.locator([
+        '.alert-error',
+        '#input-error',
+        '.kc-feedback-text',
+        'text="Invalid username or password."',
+        'text="ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"'
+      ].join(', ')).first();
+      await expect(errorAlert).toBeVisible({ timeout: 15000 });
     });
   }
 }

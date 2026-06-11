@@ -20,19 +20,18 @@ So that I can access the Cortex Cloud platform
 > - `npm run site:module new-cortex login -- --role super`
 > - `npm run site:module new-cortex login -- --role admin`
 
+### Scenario: TC-LOGIN-INVALID-USER - Login fails with incorrect username
+* **Given** the user is on the Cortex login page
+* **When** they attempt to login with username "invalid-user-name" and password "MyPassw0rd"
+* **Then** they should see an invalid credentials error message on the login screen
+
+### Scenario: TC-LOGIN-INVALID-PASS - Login fails with incorrect password
+* **Given** the user is on the Cortex login page
+* **When** they attempt to login with username "user1" and password "WrongPassword123"
+* **Then** they should see an invalid credentials error message on the login screen
+
 ---
 
 ## Backlog / Draft Scenarios
 
-### Scenario: LG-002 - Login with invalid credentials
-* **Given** the user is on the Cortex login page
-* **When** the user enters username "<invalid_username>" and password "<invalid_password>"
-* **And** clicks Sign In
-* **Then** the system should display error message "<error_message>"
-* **And** the user should remain on the login page
-
-#### Examples
-| `<invalid_username>` | `<invalid_password>` | `<error_message>` |
-| :--- | :--- | :--- |
-| `wrong_user@cortex.com` | `123456` | Username or password incorrect. |
-| `super_cortex@cortex.com` | `wrongpass` | Username or password incorrect. |
+(No pending backlog items)
