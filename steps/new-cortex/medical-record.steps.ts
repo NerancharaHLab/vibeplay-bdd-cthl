@@ -25,7 +25,10 @@ export class MedicalRecordSteps {
       const user = getUserByRole(undefined, tc.role, 'new-cortex');
       await this.loginPage.goto();
       await this.loginPage.login(user.username, user.password);
-      await expect(this.page).toHaveURL(/.*(cortex\/apps|apps)/);
+      // Wait for dashboard to fully load
+      await expect(this.page).toHaveURL(/.*cortex.*/);
+      await expect(this.page.locator('.ant-layout-content, .ant-layout-header').first()).toBeVisible({ timeout: 20000 });
+      await expect(this.page.getByText('ยินดีต้อนรับสู่ Cortex')).toBeVisible({ timeout: 20000 });
       await this.appsPage.openMedicalRecord();
     });
 
